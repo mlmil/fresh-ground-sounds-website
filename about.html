@@ -1,0 +1,304 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>About — Fresh Ground Sound</title>
+<link rel="stylesheet" href="assets/style.css">
+<style>
+.timeline {
+  padding: 80px 48px;
+  position: relative;
+}
+.timeline::before {
+  content: '';
+  position: absolute;
+  left: calc(48px + 1px);
+  top: 80px; bottom: 80px;
+  width: 1px;
+  background: linear-gradient(to bottom, transparent, var(--hairline) 10%, var(--hairline) 90%, transparent);
+}
+.timeline-item {
+  display: grid;
+  grid-template-columns: 80px 1fr;
+  gap: 40px;
+  margin-bottom: 56px;
+  position: relative;
+}
+.timeline-year {
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: 22px;
+  color: var(--tape);
+  letter-spacing: 0.08em;
+  text-align: right;
+  padding-top: 4px;
+  position: relative;
+}
+.timeline-year::after {
+  content: '';
+  position: absolute;
+  right: -48px;
+  top: 10px;
+  width: 8px; height: 8px;
+  border-radius: 50%;
+  background: var(--amber);
+  border: 2px solid var(--black);
+  transform: translateX(50%);
+}
+.timeline-content {
+  padding-left: 24px;
+}
+.timeline-content h3 {
+  font-family: 'DM Serif Display', serif;
+  font-size: 22px;
+  color: var(--cream);
+  margin-bottom: 10px;
+}
+.timeline-content p {
+  font-size: 15px;
+  line-height: 1.8;
+  color: var(--muted);
+}
+.timeline-content .highlight {
+  font-family: 'DM Mono', monospace;
+  font-size: 10px;
+  letter-spacing: 0.2em;
+  color: var(--tape);
+  text-transform: uppercase;
+  margin-bottom: 8px;
+  display: block;
+}
+
+.about-intro {
+  padding: 0 48px 80px;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 80px;
+  align-items: center;
+}
+.about-quote {
+  font-family: 'DM Serif Display', serif;
+  font-size: clamp(26px, 3vw, 38px);
+  font-style: italic;
+  line-height: 1.4;
+  color: var(--cream);
+}
+.about-quote .attr {
+  font-family: 'DM Mono', monospace;
+  font-size: 10px;
+  letter-spacing: 0.25em;
+  color: var(--tape);
+  font-style: normal;
+  display: block;
+  margin-top: 20px;
+}
+.about-body p {
+  font-size: 16px;
+  line-height: 1.85;
+  color: var(--muted);
+  margin-bottom: 20px;
+}
+.about-body p:last-child { margin-bottom: 0; }
+.people-grid {
+  padding: 0 48px 80px;
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 1px;
+  background: var(--hairline);
+  border: 1px solid var(--hairline);
+}
+.person-card {
+  background: var(--black);
+  padding: 48px 40px;
+  transition: background 0.3s;
+}
+.person-card:hover { background: var(--warm-dark); }
+.person-name {
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: 36px;
+  letter-spacing: 0.08em;
+  color: var(--cream);
+  margin-bottom: 6px;
+}
+.person-role {
+  font-family: 'DM Mono', monospace;
+  font-size: 10px;
+  letter-spacing: 0.25em;
+  color: var(--tape);
+  text-transform: uppercase;
+  margin-bottom: 20px;
+}
+.person-bio {
+  font-size: 15px;
+  line-height: 1.8;
+  color: var(--muted);
+}
+@media(max-width:768px){
+  .about-intro { grid-template-columns: 1fr; gap: 40px; padding: 0 24px 60px; }
+  .timeline { padding: 60px 24px; }
+  .timeline::before { left: calc(24px + 60px); }
+  .people-grid { grid-template-columns: 1fr; padding: 0 24px 60px; }
+}
+</style>
+</head>
+<body>
+<div class="cursor"></div>
+<div class="cursor-ring"></div>
+
+<nav>
+  <a href="index.html" class="nav-logo">Fresh Ground Sound<span>Ventura, California</span></a>
+  <ul class="nav-links">
+    <li><a href="index.html">Home</a></li>
+    <li><a href="artists.html">Artists</a></li>
+    <li><a href="equipment.html">Equipment</a></li>
+    <li><a href="about.html">About</a></li>
+    <li><a href="contact.html">Book a Session</a></li>
+  </ul>
+  <a href="tel:8056442579" class="nav-phone">(805) 644-2579</a>
+</nav>
+
+<div class="page-header">
+  <div class="page-header-label">The Story</div>
+  <h1>About<br><span class="accent">Us</span></h1>
+</div>
+
+<div class="about-intro">
+  <div class="about-quote reveal">
+    "Four decades of recording — from Van Nuys to Ventura, the music never stopped."
+    <span class="attr">— Mark Antaky, Founder</span>
+  </div>
+  <div class="about-body reveal" style="transition-delay:.15s">
+    <p>Fresh Ground Sound is a professional recording studio, rehearsal space, and live sound production company located in Ventura, California. Built on four decades of experience, the studio traces its roots to 1983 and has been home to an extraordinary range of artists — from household names to Ventura's finest local acts.</p>
+    <p>The studio runs an SSL-XL console, a deep collection of vintage outboard gear, and Pro Tools with UAD processing — delivering professional quality in a comfortable, focused environment on the Southern California coast.</p>
+  </div>
+</div>
+
+<div class="people-grid">
+  <div class="person-card reveal">
+    <div class="person-name">Mark Antaky</div>
+    <div class="person-role">Founder · Engineer · Producer</div>
+    <p class="person-bio">Mark opened Valley Center Studios in Van Nuys in 1983 and has been behind the console ever since. After relocating to Ventura in 2006, he re-launched as Fresh Ground Sound in 2012, bringing four decades of engineering expertise to the coast.</p>
+  </div>
+  <div class="person-card reveal" style="transition-delay:.1s">
+    <div class="person-name">Dave Jenkins</div>
+    <div class="person-role">Engineer · Producer</div>
+    <p class="person-bio">A long-time collaborator who co-founded Valley Center Studios alongside Mark in 1983. Dave relocated to Ventura County in 2014 and rejoined Fresh Ground Sound, bringing his deep production experience back to the team.</p>
+  </div>
+</div>
+
+<!-- Timeline -->
+<div class="timeline">
+  <div class="section-label reveal" style="margin-left:120px">History</div>
+
+  <div class="timeline-item reveal">
+    <div class="timeline-year">1983</div>
+    <div class="timeline-content">
+      <span class="highlight">Van Nuys, California</span>
+      <h3>Valley Center Studios Opens</h3>
+      <p>Mark Antaky and David Jenkins open Valley Center Studios in Van Nuys, CA, starting with two rehearsal and showcase rooms.</p>
+    </div>
+  </div>
+
+  <div class="timeline-item reveal">
+    <div class="timeline-year">1985</div>
+    <div class="timeline-content">
+      <span class="highlight">Expansion</span>
+      <h3>Five Rooms Strong</h3>
+      <p>VCS expands to five full rehearsal rooms, becoming a hub for LA area bands and performers.</p>
+    </div>
+  </div>
+
+  <div class="timeline-item reveal">
+    <div class="timeline-year">1987</div>
+    <div class="timeline-content">
+      <span class="highlight">Recording Era Begins</span>
+      <h3>24-Track Studio Added</h3>
+      <p>One room is converted into a 24-track recording studio, with four pre-production and rehearsal rooms remaining.</p>
+    </div>
+  </div>
+
+  <div class="timeline-item reveal">
+    <div class="timeline-year">1990</div>
+    <div class="timeline-content">
+      <span class="highlight">Second Studio</span>
+      <h3>Two 24-Track Studios</h3>
+      <p>A second room is remodeled, adding a second 24-track recording studio to the facility.</p>
+    </div>
+  </div>
+
+  <div class="timeline-item reveal">
+    <div class="timeline-year">2003</div>
+    <div class="timeline-content">
+      <span class="highlight">A Historic Transition</span>
+      <h3>Elliott Smith Era</h3>
+      <p>Valley Center Studios is sold and leased to legendary recording artist Elliott Smith, who operated the space as his personal studio.</p>
+    </div>
+  </div>
+
+  <div class="timeline-item reveal">
+    <div class="timeline-year">2004</div>
+    <div class="timeline-content">
+      <span class="highlight">New Monkey Studio</span>
+      <h3>The Studio Carries On</h3>
+      <p>Following Elliott Smith's passing, managers Joel Graves and Robert Cappadonna continue operations under the name "New Monkey Studio."</p>
+    </div>
+  </div>
+
+  <div class="timeline-item reveal">
+    <div class="timeline-year">2006</div>
+    <div class="timeline-content">
+      <span class="highlight">Ventura, California</span>
+      <h3>Moving to the Coast</h3>
+      <p>Mark Antaky relocates to Ventura, CA and establishes a private studio, beginning a new chapter on the Southern California coast.</p>
+    </div>
+  </div>
+
+  <div class="timeline-item reveal">
+    <div class="timeline-year">2012</div>
+    <div class="timeline-content">
+      <span class="highlight">Fresh Ground Sound Born</span>
+      <h3>Open for Business</h3>
+      <p>The studio is renamed Fresh Ground Sound / Fresh Ground Records and opens to the public with a Pro Tools and SSL console setup, three isolation rooms, and a full rehearsal configuration.</p>
+    </div>
+  </div>
+
+  <div class="timeline-item reveal">
+    <div class="timeline-year">2014</div>
+    <div class="timeline-content">
+      <span class="highlight">Reunion</span>
+      <h3>Dave Jenkins Returns</h3>
+      <p>Long-time collaborator Dave Jenkins moves to Ventura County and begins recording and producing at Fresh Ground Sound, reuniting the original team.</p>
+    </div>
+  </div>
+
+  <div class="timeline-item reveal">
+    <div class="timeline-year">Now</div>
+    <div class="timeline-content">
+      <span class="highlight">3740 Transport Street · Ventura, CA</span>
+      <h3>Still Making Records</h3>
+      <p>Four decades in, Fresh Ground Sound continues to serve musicians, producers, and bands with the same commitment to quality sound and experienced engineering that started it all.</p>
+    </div>
+  </div>
+</div>
+
+<section class="section" style="background:var(--warm-dark);border-top:1px solid var(--hairline)">
+  <div class="section-label">Ready?</div>
+  <h2 class="section-title">Let's Make<br><span class="accent">Something.</span></h2>
+  <div style="display:flex;gap:20px;flex-wrap:wrap">
+    <a href="contact.html" class="btn-primary">Book a Session</a>
+    <a href="equipment.html" class="btn-ghost">See the Gear</a>
+  </div>
+</section>
+
+<footer>
+  <div class="footer-grid">
+    <div class="footer-brand"><div class="logo">Fresh Ground Sound</div><div class="tagline">Ventura, California · Est. 1983</div><p>Professional recording, rehearsal, and live sound production on the coast of Southern California.</p></div>
+    <div class="footer-col"><h4>Navigate</h4><ul><li><a href="index.html">Home</a></li><li><a href="artists.html">Artists</a></li><li><a href="equipment.html">Equipment</a></li><li><a href="about.html">About</a></li><li><a href="contact.html">Book</a></li></ul></div>
+    <div class="footer-col"><h4>Services</h4><ul><li><a href="equipment.html">Recording — $60/hr</a></li><li><a href="equipment.html">Rehearsal — $30/hr</a></li><li><a href="contact.html">Live Sound</a></li></ul></div>
+    <div class="footer-col"><h4>Contact</h4><p>3740 Transport Street<br>Ventura, CA 93003<br><br><a href="tel:8056442579">(805) 644-2579</a><br><a href="mailto:Freshgroundsound@gmail.com">Freshgroundsound@gmail.com</a></p></div>
+  </div>
+  <div class="footer-bottom"><p>© 2025 Fresh Ground Records</p><p>3740 Transport Street · Ventura, CA 93003</p></div>
+</footer>
+<script src="assets/nav.js"></script>
+</body>
+</html>

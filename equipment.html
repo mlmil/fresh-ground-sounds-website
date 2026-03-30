@@ -1,0 +1,335 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Equipment & Rates — Fresh Ground Sound</title>
+<link rel="stylesheet" href="assets/style.css">
+<style>
+.gear-section { padding: 0 48px 80px; }
+.gear-section h3 {
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: 32px;
+  letter-spacing: 0.08em;
+  color: var(--amber);
+  margin-bottom: 24px;
+  padding-bottom: 12px;
+  border-bottom: 1px solid var(--hairline);
+}
+.gear-list {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+  gap: 8px;
+  margin-bottom: 48px;
+}
+.gear-item {
+  font-family: 'DM Mono', monospace;
+  font-size: 12px;
+  letter-spacing: 0.08em;
+  color: var(--muted);
+  padding: 10px 16px;
+  background: var(--warm-dark);
+  border-left: 2px solid var(--hairline);
+  transition: border-color 0.3s, color 0.3s;
+  line-height: 1.5;
+}
+.gear-item:hover { border-color: var(--tape); color: var(--cream); }
+
+.rates-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 32px;
+  padding: 0 48px 80px;
+}
+.rate-block {
+  background: var(--warm-dark);
+  border: 1px solid var(--hairline);
+  padding: 40px;
+}
+.rate-block h3 {
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: 36px;
+  letter-spacing: 0.06em;
+  color: var(--cream);
+  margin-bottom: 8px;
+}
+.rate-block .big-rate {
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: 56px;
+  color: var(--amber);
+  line-height: 1;
+  margin-bottom: 24px;
+}
+.rate-block ul {
+  list-style: none;
+  margin-bottom: 24px;
+}
+.rate-block ul li {
+  font-family: 'DM Mono', monospace;
+  font-size: 11px;
+  letter-spacing: 0.12em;
+  color: var(--muted);
+  padding: 8px 0;
+  border-bottom: 1px solid var(--hairline);
+  display: flex;
+  justify-content: space-between;
+}
+.rate-block ul li span { color: var(--cream); }
+.rate-note {
+  font-size: 13px;
+  color: var(--muted);
+  font-style: italic;
+  line-height: 1.7;
+}
+
+.room-dims {
+  padding: 0 48px 80px;
+}
+.dims-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 1px;
+  background: var(--hairline);
+  border: 1px solid var(--hairline);
+  margin-top: 32px;
+}
+.dim-card {
+  background: var(--black);
+  padding: 32px 24px;
+  text-align: center;
+}
+.dim-card .room-name {
+  font-family: 'DM Mono', monospace;
+  font-size: 9px;
+  letter-spacing: 0.3em;
+  color: var(--tape);
+  text-transform: uppercase;
+  margin-bottom: 12px;
+}
+.dim-card .room-size {
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: 28px;
+  color: var(--cream);
+  letter-spacing: 0.05em;
+}
+
+.calendar-section {
+  padding: 0 48px 80px;
+}
+.calendar-full-wrap {
+  background: var(--deep);
+  border: 1px solid var(--hairline);
+}
+.calendar-full-wrap .calendar-header {
+  padding: 16px 24px;
+  background: var(--black);
+  border-bottom: 1px solid var(--hairline);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+.calendar-full-wrap .calendar-header span {
+  font-family: 'DM Mono', monospace;
+  font-size: 10px;
+  letter-spacing: 0.3em;
+  color: var(--tape);
+  text-transform: uppercase;
+}
+.cal-dot { width: 6px; height: 6px; border-radius: 50%; background: var(--amber); animation: blink 2s infinite; }
+@keyframes blink { 0%,100%{opacity:1;} 50%{opacity:0.3;} }
+.calendar-full-wrap iframe {
+  width: 100%;
+  height: 600px;
+  border: none;
+  filter: invert(1) hue-rotate(180deg) brightness(0.85) saturate(0.7);
+}
+@media(max-width:768px){
+  .rates-grid { grid-template-columns: 1fr; padding: 0 24px 60px; }
+  .gear-section { padding: 0 24px 60px; }
+  .dims-grid { grid-template-columns: repeat(2,1fr); }
+  .calendar-section { padding: 0 24px 60px; }
+  .room-dims { padding: 0 24px 60px; }
+}
+</style>
+</head>
+<body>
+<div class="cursor"></div>
+<div class="cursor-ring"></div>
+
+<nav>
+  <a href="index.html" class="nav-logo">Fresh Ground Sound<span>Ventura, California</span></a>
+  <ul class="nav-links">
+    <li><a href="index.html">Home</a></li>
+    <li><a href="artists.html">Artists</a></li>
+    <li><a href="equipment.html">Equipment</a></li>
+    <li><a href="about.html">About</a></li>
+    <li><a href="contact.html">Book a Session</a></li>
+  </ul>
+  <a href="tel:8056442579" class="nav-phone">(805) 644-2579</a>
+</nav>
+
+<div class="page-header">
+  <div class="page-header-label">The Arsenal</div>
+  <h1>Gear &<br><span class="accent">Rates</span></h1>
+</div>
+
+<!-- Rates -->
+<div class="rates-grid" style="padding-top:80px">
+  <div class="rate-block reveal" id="recording">
+    <div class="section-label">Studio A</div>
+    <h3>Recording</h3>
+    <div class="big-rate">$60<span style="font-size:24px;color:var(--muted)">/hr</span></div>
+    <ul>
+      <li>Tracking & Overdubbing <span>Included</span></li>
+      <li>Mixing <span>Included</span></li>
+      <li>Assistant Engineer <span>Included</span></li>
+      <li>Producer <span>Not included</span></li>
+      <li>Project / Block Rates <span>Inquire</span></li>
+    </ul>
+    <p class="rate-note">Contact us about project and block rate packages — significant savings available for longer bookings.</p>
+    <br>
+    <a href="contact.html" class="btn-primary">Book Recording</a>
+  </div>
+
+  <div class="rate-block reveal" style="transition-delay:.15s" id="rehearsal">
+    <div class="section-label">Rehearsal Room</div>
+    <h3>Rehearsal</h3>
+    <div class="big-rate">$30<span style="font-size:24px;color:var(--muted)">/hr</span></div>
+    <ul>
+      <li>3 Hours (minimum weeknights) <span>$90</span></li>
+      <li>4 Hours <span>$110</span></li>
+      <li>5 Hours <span>$130</span></li>
+      <li>Day Lockout (12 hrs) <span>$240</span></li>
+      <li>Available Hours <span>11am – 10pm</span></li>
+    </ul>
+    <p class="rate-note"><strong style="color:var(--cream)">Cancellation:</strong> 48-hour notice required or payment in full is due. Drum kit included — bring your own cymbals, snare, kick pedal, and throne.</p>
+    <br>
+    <a href="contact.html" class="btn-primary">Book Rehearsal</a>
+  </div>
+</div>
+
+<!-- Studio Dimensions -->
+<div class="room-dims">
+  <div class="section-label reveal">Studio Layout</div>
+  <div class="dims-grid reveal" style="transition-delay:.1s">
+    <div class="dim-card"><div class="room-name">Tracking & Mixing</div><div class="room-size">16' × 20' × 16'</div></div>
+    <div class="dim-card"><div class="room-name">Vocal Room</div><div class="room-size">4' × 10'</div></div>
+    <div class="dim-card"><div class="room-name">Piano Room</div><div class="room-size">16' × 10'</div></div>
+    <div class="dim-card"><div class="room-name">Lobby</div><div class="room-size">8' × 16'</div></div>
+  </div>
+</div>
+
+<!-- Gear -->
+<div class="gear-section">
+  <div class="section-label reveal">Signal Chain</div>
+
+  <h3 class="reveal">Recording System</h3>
+  <div class="gear-list reveal">
+    <div class="gear-item">SSL-XL Console</div>
+    <div class="gear-item">Chandler 16 Mixer</div>
+    <div class="gear-item">Pro Tools 12</div>
+    <div class="gear-item">Lynx HiLo</div>
+    <div class="gear-item">Lynx Aurora n 16HD</div>
+    <div class="gear-item">Universal Audio UAD-2 Satellite TB3 — Octo Core</div>
+  </div>
+
+  <h3 class="reveal">Monitors</h3>
+  <div class="gear-list reveal">
+    <div class="gear-item">Barefoot MM27</div>
+    <div class="gear-item">KRK Rokit 5</div>
+  </div>
+
+  <h3 class="reveal">Processing</h3>
+  <div class="gear-list reveal">
+    <div class="gear-item">Neve 1272 (× 4)</div>
+    <div class="gear-item">API 512 (× 2)</div>
+    <div class="gear-item">Neve 33609J</div>
+    <div class="gear-item">UA 6176 Pre/Comp</div>
+    <div class="gear-item">Focusrite ISA2 Pre (× 2)</div>
+    <div class="gear-item">Quad 8 EQ 310/333C (× 2)</div>
+    <div class="gear-item">Distressor EL8-X (× 2)</div>
+    <div class="gear-item">Quad 333P EQ (× 2)</div>
+    <div class="gear-item">Helios Type 69 (× 2)</div>
+    <div class="gear-item">DBX 160</div>
+    <div class="gear-item">API 527</div>
+    <div class="gear-item">Retro Sta-Level</div>
+    <div class="gear-item">MAAG EQ4 (× 2)</div>
+    <div class="gear-item">Electrodyne 501 Preamp</div>
+  </div>
+
+  <h3 class="reveal">Microphones</h3>
+  <div class="gear-list reveal">
+    <div class="gear-item">Cascade Fat Head Ribbon (× 3)</div>
+    <div class="gear-item">Cascade Vin-Jet Ribbon (× 2)</div>
+    <div class="gear-item">Royer R121</div>
+    <div class="gear-item">Rode Classic II Tube (× 2)</div>
+    <div class="gear-item">SE z5600a II Tube</div>
+    <div class="gear-item">ADK A51s IV (× 2)</div>
+    <div class="gear-item">Audix ADX-51</div>
+    <div class="gear-item">Audix D6</div>
+    <div class="gear-item">Audix D2 (× 3)</div>
+    <div class="gear-item">Audio-Technica 4050cms</div>
+    <div class="gear-item">ATM 25</div>
+    <div class="gear-item">Octavia MK012-01 (× 2)</div>
+    <div class="gear-item">Lewitt LTC550</div>
+    <div class="gear-item">Shure SM7 (× 2)</div>
+    <div class="gear-item">Shure SM57 (× 2)</div>
+    <div class="gear-item">Shure 869</div>
+    <div class="gear-item">Shure 520DX (× 2)</div>
+    <div class="gear-item">Shure Beta 52A</div>
+    <div class="gear-item">EV PZM</div>
+  </div>
+
+  <h3 class="reveal">Amplifiers</h3>
+  <div class="gear-list reveal">
+    <div class="gear-item">Fender Blues Deluxe</div>
+    <div class="gear-item">Marshall MkII Lead</div>
+    <div class="gear-item">Fender Champ</div>
+    <div class="gear-item">Albion GS12</div>
+    <div class="gear-item">Magnavox</div>
+  </div>
+
+  <h3 class="reveal">Rehearsal PA</h3>
+  <div class="gear-list reveal">
+    <div class="gear-item">16×4×2 Mackie Mixer w/EFX</div>
+    <div class="gear-item">2 Mains / Monitor Speakers</div>
+    <div class="gear-item">4 Microphones</div>
+    <div class="gear-item">5-Piece Sonar Drum Kit</div>
+    <div class="gear-item">Albion 300W Bass Cabinet</div>
+    <div class="gear-item">Music & Guitar Stands</div>
+  </div>
+</div>
+
+<!-- Calendar -->
+<div class="calendar-section">
+  <div class="section-label reveal">Live Schedule</div>
+  <h2 class="section-title reveal">Studio <span class="accent">Availability</span></h2>
+  <div class="calendar-full-wrap reveal" style="transition-delay:.1s">
+    <div class="calendar-header">
+      <span>Real-Time Booking Calendar</span>
+      <div class="cal-dot"></div>
+    </div>
+    <iframe
+      src="https://www.google.com/calendar/embed?src=freshgroundrecords@gmail.com&ctz=America/Los_Angeles&showTitle=0&showNav=1&showDate=1&showPrint=0&showTabs=0&showCalendars=0&mode=MONTH&bgcolor=%230a0908"
+      title="Studio Availability Calendar"
+      frameborder="0"
+      scrolling="no">
+    </iframe>
+  </div>
+  <p style="font-family:'DM Mono',monospace;font-size:10px;letter-spacing:0.15em;color:var(--muted);margin-top:16px;">
+    See an open slot? <a href="contact.html" style="color:var(--tape);text-decoration:none;">Contact us to reserve it →</a>
+  </p>
+</div>
+
+<footer>
+  <div class="footer-grid">
+    <div class="footer-brand"><div class="logo">Fresh Ground Sound</div><div class="tagline">Ventura, California · Est. 1983</div><p>Professional recording, rehearsal, and live sound production on the coast of Southern California.</p></div>
+    <div class="footer-col"><h4>Navigate</h4><ul><li><a href="index.html">Home</a></li><li><a href="artists.html">Artists</a></li><li><a href="equipment.html">Equipment</a></li><li><a href="about.html">About</a></li><li><a href="contact.html">Book</a></li></ul></div>
+    <div class="footer-col"><h4>Services</h4><ul><li><a href="#recording">Recording — $60/hr</a></li><li><a href="#rehearsal">Rehearsal — $30/hr</a></li><li><a href="contact.html">Live Sound</a></li></ul></div>
+    <div class="footer-col"><h4>Contact</h4><p>3740 Transport Street<br>Ventura, CA 93003<br><br><a href="tel:8056442579">(805) 644-2579</a><br><a href="mailto:Freshgroundsound@gmail.com">Freshgroundsound@gmail.com</a></p></div>
+  </div>
+  <div class="footer-bottom"><p>© 2025 Fresh Ground Records</p><p>3740 Transport Street · Ventura, CA 93003</p></div>
+</footer>
+<script src="assets/nav.js"></script>
+</body>
+</html>

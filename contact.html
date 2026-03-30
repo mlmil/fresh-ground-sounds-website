@@ -1,0 +1,568 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Book a Session — Fresh Ground Sound</title>
+<link rel="stylesheet" href="assets/style.css">
+<style>
+
+/*
+  FORMSPREE SETUP (Email Delivery):
+  ──────────────────────────────────
+  1. Go to formspree.io → create free account
+  2. Create a new form → copy the form endpoint URL
+  3. Replace action="YOUR_FORMSPREE_ENDPOINT" on the form below
+  4. That's it — submissions go straight to Freshgroundsound@gmail.com
+
+  SMS SETUP (via Zapier):
+  ──────────────────────
+  1. Create a free Zapier account at zapier.com
+  2. Create a new Zap: Trigger = "Formspree — New Submission"
+  3. Action = "SMS by Zapier — Send SMS"
+  4. Connect your Formspree form and add the studio's mobile number
+  5. Map form fields to the SMS message body
+  6. Every new booking request → instant SMS to the studio
+*/
+
+.contact-layout {
+  padding: 80px 48px;
+  display: grid;
+  grid-template-columns: 1fr 1.4fr;
+  gap: 80px;
+  align-items: start;
+}
+
+/* Info sidebar */
+.contact-info .info-block {
+  margin-bottom: 40px;
+}
+.contact-info .info-label {
+  font-family: 'DM Mono', monospace;
+  font-size: 9px;
+  letter-spacing: 0.35em;
+  color: var(--tape);
+  text-transform: uppercase;
+  margin-bottom: 10px;
+}
+.contact-info .info-value {
+  font-family: 'DM Serif Display', serif;
+  font-size: 20px;
+  color: var(--cream);
+  line-height: 1.5;
+}
+.contact-info .info-value a {
+  color: var(--cream);
+  text-decoration: none;
+  transition: color 0.3s;
+}
+.contact-info .info-value a:hover { color: var(--amber); }
+
+.contact-divider {
+  width: 100%;
+  height: 1px;
+  background: var(--hairline);
+  margin: 40px 0;
+}
+
+.quick-contact-btns {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+.qc-btn {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  padding: 16px 20px;
+  border: 1px solid var(--hairline);
+  text-decoration: none;
+  transition: border-color 0.3s, background 0.3s;
+  background: transparent;
+}
+.qc-btn:hover {
+  border-color: var(--tape);
+  background: var(--glow);
+}
+.qc-btn-icon {
+  font-size: 20px;
+  width: 32px;
+  text-align: center;
+}
+.qc-btn-text .label {
+  font-family: 'DM Mono', monospace;
+  font-size: 9px;
+  letter-spacing: 0.25em;
+  color: var(--muted);
+  text-transform: uppercase;
+  display: block;
+  margin-bottom: 3px;
+}
+.qc-btn-text .value {
+  font-family: 'Lora', serif;
+  font-size: 16px;
+  color: var(--cream);
+}
+
+/* Booking Form */
+.booking-form-wrap {
+  background: var(--warm-dark);
+  border: 1px solid var(--hairline);
+  padding: 48px;
+}
+.booking-form-wrap h2 {
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: 40px;
+  letter-spacing: 0.05em;
+  color: var(--cream);
+  margin-bottom: 8px;
+}
+.booking-form-wrap h2 .accent { color: var(--amber); }
+.booking-form-wrap .form-intro {
+  font-size: 14px;
+  color: var(--muted);
+  font-style: italic;
+  margin-bottom: 36px;
+  line-height: 1.7;
+}
+
+.form-row {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 16px;
+}
+.form-group {
+  margin-bottom: 20px;
+}
+.form-group label {
+  font-family: 'DM Mono', monospace;
+  font-size: 9px;
+  letter-spacing: 0.3em;
+  color: var(--muted);
+  text-transform: uppercase;
+  display: block;
+  margin-bottom: 8px;
+}
+.form-group input,
+.form-group select,
+.form-group textarea {
+  width: 100%;
+  background: var(--black);
+  border: 1px solid var(--hairline);
+  color: var(--cream);
+  font-family: 'Lora', serif;
+  font-size: 15px;
+  padding: 12px 16px;
+  outline: none;
+  transition: border-color 0.3s;
+  appearance: none;
+  -webkit-appearance: none;
+}
+.form-group input:focus,
+.form-group select:focus,
+.form-group textarea:focus {
+  border-color: var(--tape);
+}
+.form-group input::placeholder,
+.form-group textarea::placeholder { color: var(--muted); font-style: italic; }
+.form-group select { cursor: none; }
+.form-group select option { background: var(--black); }
+.form-group textarea { resize: vertical; min-height: 120px; }
+
+/* Rate estimator */
+.rate-estimator {
+  background: var(--black);
+  border: 1px solid var(--hairline);
+  padding: 20px;
+  margin-bottom: 24px;
+}
+.rate-estimator-label {
+  font-family: 'DM Mono', monospace;
+  font-size: 9px;
+  letter-spacing: 0.3em;
+  color: var(--tape);
+  text-transform: uppercase;
+  margin-bottom: 12px;
+}
+.rate-display {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+.rate-display .est-total {
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: 36px;
+  color: var(--amber);
+  letter-spacing: 0.05em;
+}
+.rate-display .est-note {
+  font-family: 'DM Mono', monospace;
+  font-size: 10px;
+  letter-spacing: 0.1em;
+  color: var(--muted);
+  text-align: right;
+  line-height: 1.6;
+}
+
+.form-submit {
+  display: flex;
+  gap: 16px;
+  align-items: center;
+  margin-top: 8px;
+  flex-wrap: wrap;
+}
+.form-submit p {
+  font-family: 'DM Mono', monospace;
+  font-size: 9px;
+  letter-spacing: 0.15em;
+  color: var(--muted);
+}
+
+/* Success state */
+.form-success {
+  display: none;
+  text-align: center;
+  padding: 48px 32px;
+}
+.form-success .success-icon { font-size: 48px; margin-bottom: 20px; }
+.form-success h3 {
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: 36px;
+  color: var(--amber);
+  letter-spacing: 0.1em;
+  margin-bottom: 12px;
+}
+.form-success p {
+  font-size: 15px;
+  color: var(--muted);
+  line-height: 1.7;
+}
+
+/* Map section */
+.map-section {
+  padding: 0 48px 80px;
+}
+.map-wrap {
+  border: 1px solid var(--hairline);
+  overflow: hidden;
+}
+.map-wrap iframe {
+  width: 100%;
+  height: 380px;
+  border: none;
+  filter: invert(1) hue-rotate(180deg) brightness(0.85) saturate(0.6);
+}
+
+@media(max-width:900px){
+  .contact-layout { grid-template-columns: 1fr; gap: 48px; padding: 60px 24px; }
+  .form-row { grid-template-columns: 1fr; }
+  .booking-form-wrap { padding: 32px 24px; }
+  .map-section { padding: 0 24px 60px; }
+}
+</style>
+</head>
+<body>
+<div class="cursor"></div>
+<div class="cursor-ring"></div>
+
+<nav>
+  <a href="index.html" class="nav-logo">Fresh Ground Sound<span>Ventura, California</span></a>
+  <ul class="nav-links">
+    <li><a href="index.html">Home</a></li>
+    <li><a href="artists.html">Artists</a></li>
+    <li><a href="equipment.html">Equipment</a></li>
+    <li><a href="about.html">About</a></li>
+    <li><a href="contact.html">Book a Session</a></li>
+  </ul>
+  <a href="tel:8056442579" class="nav-phone">(805) 644-2579</a>
+</nav>
+
+<div class="page-header">
+  <div class="page-header-label">Get in Touch</div>
+  <h1>Book a<br><span class="accent">Session</span></h1>
+</div>
+
+<div class="contact-layout">
+
+  <!-- Left: Info -->
+  <div class="contact-info reveal">
+    <div class="info-block">
+      <div class="info-label">Address</div>
+      <div class="info-value">3740 Transport Street<br>Ventura, California 93003</div>
+    </div>
+    <div class="info-block">
+      <div class="info-label">Hours</div>
+      <div class="info-value">By Appointment<br>11am – 10pm Daily</div>
+    </div>
+    <div class="info-block">
+      <div class="info-label">Cancellation Policy</div>
+      <div class="info-value" style="font-size:15px;color:var(--muted);font-family:'Lora',serif">48-hour notice required to cancel. No-shows or late cancellations are charged in full.</div>
+    </div>
+
+    <div class="contact-divider"></div>
+
+    <div class="quick-contact-btns">
+      <a href="tel:8056442579" class="qc-btn">
+        <span class="qc-btn-icon">📞</span>
+        <div class="qc-btn-text">
+          <span class="label">Call or Text</span>
+          <span class="value">(805) 644-2579</span>
+        </div>
+      </a>
+      <a href="sms:8056442579" class="qc-btn">
+        <span class="qc-btn-icon">💬</span>
+        <div class="qc-btn-text">
+          <span class="label">Text Us</span>
+          <span class="value">Send a Text Message</span>
+        </div>
+      </a>
+      <a href="mailto:Freshgroundsound@gmail.com" class="qc-btn">
+        <span class="qc-btn-icon">✉️</span>
+        <div class="qc-btn-text">
+          <span class="label">Email</span>
+          <span class="value">Freshgroundsound@gmail.com</span>
+        </div>
+      </a>
+      <a href="https://instagram.com/freshgroundsound" target="_blank" rel="noopener" class="qc-btn">
+        <span class="qc-btn-icon">📷</span>
+        <div class="qc-btn-text">
+          <span class="label">Instagram</span>
+          <span class="value">@freshgroundsound</span>
+        </div>
+      </a>
+    </div>
+
+    <div class="contact-divider"></div>
+
+    <div class="info-block">
+      <div class="info-label">Quick Rates</div>
+      <div class="info-value" style="font-size:16px">
+        <div style="display:flex;justify-content:space-between;border-bottom:1px solid var(--hairline);padding:10px 0;font-family:'DM Mono',monospace;font-size:12px;">
+          <span style="color:var(--muted)">Recording</span><span style="color:var(--amber)">$60/hr</span>
+        </div>
+        <div style="display:flex;justify-content:space-between;border-bottom:1px solid var(--hairline);padding:10px 0;font-family:'DM Mono',monospace;font-size:12px;">
+          <span style="color:var(--muted)">Rehearsal</span><span style="color:var(--amber)">$30/hr</span>
+        </div>
+        <div style="display:flex;justify-content:space-between;padding:10px 0;font-family:'DM Mono',monospace;font-size:12px;">
+          <span style="color:var(--muted)">Block Rates</span><span style="color:var(--tape)">Inquire</span>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Right: Form -->
+  <div class="booking-form-wrap reveal" style="transition-delay:.15s">
+    <h2>Session <span class="accent">Request</span></h2>
+    <p class="form-intro">Fill this out and we'll get back to you by phone or email to confirm your booking. Usually respond within a few hours.</p>
+
+    <!--
+      SETUP: Replace action="" below with your Formspree endpoint.
+      Example: action="https://formspree.io/f/xabcdefg"
+      Get your endpoint at formspree.io (free, no account required for basics)
+    -->
+    <form id="bookingForm" action="YOUR_FORMSPREE_ENDPOINT" method="POST">
+      <!-- Hidden fields for Formspree -->
+      <input type="hidden" name="_subject" value="New Fresh Ground Sound Booking Request">
+      <input type="hidden" name="_next" value="">
+
+      <div class="form-row">
+        <div class="form-group">
+          <label for="name">Your Name *</label>
+          <input type="text" id="name" name="name" placeholder="Artist or Band Name" required>
+        </div>
+        <div class="form-group">
+          <label for="phone">Phone *</label>
+          <input type="tel" id="phone" name="phone" placeholder="(805) 000-0000" required>
+        </div>
+      </div>
+
+      <div class="form-group">
+        <label for="email">Email *</label>
+        <input type="email" id="email" name="email" placeholder="your@email.com" required>
+      </div>
+
+      <div class="form-row">
+        <div class="form-group">
+          <label for="service">Service *</label>
+          <select id="service" name="service" required onchange="updateEstimate()">
+            <option value="" disabled selected>Select a service</option>
+            <option value="recording">Recording — $60/hr</option>
+            <option value="rehearsal">Rehearsal — $30/hr</option>
+            <option value="live-sound">Live Sound Production</option>
+            <option value="block-rate">Block Rate (inquire)</option>
+          </select>
+        </div>
+        <div class="form-group">
+          <label for="hours">Estimated Hours</label>
+          <select id="hours" name="hours" onchange="updateEstimate()">
+            <option value="0">Select hours</option>
+            <option value="1">1 hour</option>
+            <option value="2">2 hours</option>
+            <option value="3">3 hours</option>
+            <option value="4">4 hours</option>
+            <option value="5">5 hours</option>
+            <option value="8">8 hours</option>
+            <option value="12">12 hours (Day Lockout)</option>
+          </select>
+        </div>
+      </div>
+
+      <div class="form-row">
+        <div class="form-group">
+          <label for="preferred-date">Preferred Date</label>
+          <input type="date" id="preferred-date" name="preferred_date">
+        </div>
+        <div class="form-group">
+          <label for="preferred-time">Preferred Start Time</label>
+          <select id="preferred-time" name="preferred_time">
+            <option value="">Select time</option>
+            <option>11:00 AM</option>
+            <option>12:00 PM</option>
+            <option>1:00 PM</option>
+            <option>2:00 PM</option>
+            <option>3:00 PM</option>
+            <option>4:00 PM</option>
+            <option>5:00 PM</option>
+            <option>6:00 PM</option>
+            <option>7:00 PM</option>
+            <option>8:00 PM</option>
+          </select>
+        </div>
+      </div>
+
+      <!-- Rate Estimator -->
+      <div class="rate-estimator" id="rateEstimator" style="display:none">
+        <div class="rate-estimator-label">Estimated Session Cost</div>
+        <div class="rate-display">
+          <div class="est-total" id="estTotal">$0</div>
+          <div class="est-note" id="estNote">Estimate only<br>Final rate confirmed at booking</div>
+        </div>
+      </div>
+
+      <div class="form-group">
+        <label for="project-type">Project Type</label>
+        <input type="text" id="project-type" name="project_type" placeholder="e.g. Rock album, hip-hop singles, band rehearsal…">
+      </div>
+
+      <div class="form-group">
+        <label for="message">Additional Details</label>
+        <textarea id="message" name="message" placeholder="Tell us about your project, how many musicians, any gear needs, questions about rates…"></textarea>
+      </div>
+
+      <!-- Honeypot anti-spam -->
+      <input type="text" name="_gotcha" style="display:none">
+
+      <div class="form-submit">
+        <button type="submit" class="btn-primary">Send Booking Request</button>
+        <p>We'll respond within a few hours by phone or email.</p>
+      </div>
+    </form>
+
+    <div class="form-success" id="formSuccess">
+      <div class="success-icon">🎙️</div>
+      <h3>Request Sent!</h3>
+      <p>We'll be in touch shortly to confirm your session.<br>
+      Questions? Call us at <a href="tel:8056442579" style="color:var(--amber)">(805) 644-2579</a>.</p>
+    </div>
+  </div>
+</div>
+
+<!-- Map -->
+<div class="map-section">
+  <div class="section-label reveal">Find Us</div>
+  <h2 class="section-title reveal">3740 Transport St<br><span class="accent">Ventura, CA</span></h2>
+  <div class="map-wrap reveal" style="transition-delay:.1s">
+    <iframe
+      src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3293.9!2d-119.228!3d34.242!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x0!2s3740+Transport+St%2C+Ventura%2C+CA+93003!5e0!3m2!1sen!2sus!4v1"
+      allowfullscreen=""
+      loading="lazy"
+      referrerpolicy="no-referrer-when-downgrade"
+      title="Fresh Ground Sound Location">
+    </iframe>
+  </div>
+  <p style="font-family:'DM Mono',monospace;font-size:10px;letter-spacing:0.15em;color:var(--muted);margin-top:12px">
+    3740 Transport Street · Ventura, California 93003
+  </p>
+</div>
+
+<footer>
+  <div class="footer-grid">
+    <div class="footer-brand"><div class="logo">Fresh Ground Sound</div><div class="tagline">Ventura, California · Est. 1983</div><p>Professional recording, rehearsal, and live sound production on the coast of Southern California.</p></div>
+    <div class="footer-col"><h4>Navigate</h4><ul><li><a href="index.html">Home</a></li><li><a href="artists.html">Artists</a></li><li><a href="equipment.html">Equipment</a></li><li><a href="about.html">About</a></li><li><a href="contact.html">Book</a></li></ul></div>
+    <div class="footer-col"><h4>Services</h4><ul><li><a href="equipment.html">Recording — $60/hr</a></li><li><a href="equipment.html">Rehearsal — $30/hr</a></li><li><a href="contact.html">Live Sound</a></li></ul></div>
+    <div class="footer-col"><h4>Contact</h4><p>3740 Transport Street<br>Ventura, CA 93003<br><br><a href="tel:8056442579">(805) 644-2579</a><br><a href="mailto:Freshgroundsound@gmail.com">Freshgroundsound@gmail.com</a></p></div>
+  </div>
+  <div class="footer-bottom"><p>© 2025 Fresh Ground Records</p><p>3740 Transport Street · Ventura, CA 93003</p></div>
+</footer>
+
+<script src="assets/nav.js"></script>
+<script>
+// Rate estimator
+function updateEstimate() {
+  const service = document.getElementById('service').value;
+  const hours = parseFloat(document.getElementById('hours').value) || 0;
+  const estimator = document.getElementById('rateEstimator');
+  const totalEl = document.getElementById('estTotal');
+  const noteEl = document.getElementById('estNote');
+
+  const rates = { recording: 60, rehearsal: 30 };
+
+  if (!service || !hours || !(service in rates)) {
+    estimator.style.display = 'none';
+    return;
+  }
+
+  estimator.style.display = 'block';
+  let total = rates[service] * hours;
+
+  // Rehearsal package rates
+  if (service === 'rehearsal') {
+    if (hours >= 12) total = 240;
+    else if (hours >= 5) total = 130;
+    else if (hours >= 4) total = 110;
+    else if (hours >= 3) total = 90;
+  }
+
+  totalEl.textContent = '$' + total.toFixed(0);
+  noteEl.innerHTML = `Estimate only<br>Final rate confirmed at booking`;
+}
+
+// Form submission
+document.getElementById('bookingForm').addEventListener('submit', async function(e) {
+  e.preventDefault();
+
+  const form = this;
+  const action = form.getAttribute('action');
+
+  // If Formspree not yet configured, show a friendly message
+  if (!action || action === 'YOUR_FORMSPREE_ENDPOINT') {
+    alert('Booking form not yet configured. Please call (805) 644-2579 or email Freshgroundsound@gmail.com to book your session.');
+    return;
+  }
+
+  const btn = form.querySelector('button[type="submit"]');
+  btn.textContent = 'Sending…';
+  btn.disabled = true;
+
+  try {
+    const resp = await fetch(action, {
+      method: 'POST',
+      body: new FormData(form),
+      headers: { 'Accept': 'application/json' }
+    });
+
+    if (resp.ok) {
+      form.style.display = 'none';
+      document.getElementById('formSuccess').style.display = 'block';
+    } else {
+      throw new Error('Submit failed');
+    }
+  } catch(err) {
+    btn.textContent = 'Send Booking Request';
+    btn.disabled = false;
+    alert('Something went wrong. Please call (805) 644-2579 or email Freshgroundsound@gmail.com directly.');
+  }
+});
+</script>
+</body>
+</html>

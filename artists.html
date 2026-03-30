@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Artists — Fresh Ground Sound</title>
+<link rel="stylesheet" href="assets/style.css">
+<style>
+.artists-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+  gap: 1px;
+  background: var(--hairline);
+  border: 1px solid var(--hairline);
+  margin-top: 48px;
+}
+.artist-card {
+  background: var(--black);
+  padding: 32px 28px;
+  transition: background 0.3s;
+  position: relative;
+  overflow: hidden;
+}
+.artist-card::before {
+  content: '';
+  position: absolute;
+  left: 0; top: 0; bottom: 0;
+  width: 2px;
+  background: var(--amber);
+  transform: scaleY(0);
+  transition: transform 0.3s ease;
+  transform-origin: bottom;
+}
+.artist-card:hover { background: var(--warm-dark); }
+.artist-card:hover::before { transform: scaleY(1); }
+.artist-name {
+  font-family: 'DM Serif Display', serif;
+  font-size: 20px;
+  color: var(--cream);
+  margin-bottom: 6px;
+  transition: color 0.3s;
+}
+.artist-card:hover .artist-name { color: var(--amber); }
+.artist-type {
+  font-family: 'DM Mono', monospace;
+  font-size: 9px;
+  letter-spacing: 0.25em;
+  color: var(--muted);
+  text-transform: uppercase;
+}
+.intro-text {
+  max-width: 600px;
+  font-size: 17px;
+  line-height: 1.8;
+  color: var(--muted);
+  font-style: italic;
+  margin-top: 24px;
+}
+</style>
+</head>
+<body>
+<div class="cursor"></div>
+<div class="cursor-ring"></div>
+
+<nav>
+  <a href="index.html" class="nav-logo">Fresh Ground Sound<span>Ventura, California</span></a>
+  <ul class="nav-links">
+    <li><a href="index.html">Home</a></li>
+    <li><a href="artists.html">Artists</a></li>
+    <li><a href="equipment.html">Equipment</a></li>
+    <li><a href="about.html">About</a></li>
+    <li><a href="contact.html">Book a Session</a></li>
+  </ul>
+  <a href="tel:8056442579" class="nav-phone">(805) 644-2579</a>
+</nav>
+
+<div class="page-header">
+  <div class="page-header-label">Our Clients</div>
+  <h1>Artists &<br><span class="accent">Recordings</span></h1>
+  <p class="intro-text">From Grammy-winning artists to Ventura's finest local acts — Fresh Ground Sound has been the room where it happens.</p>
+</div>
+
+<section class="section">
+  <div class="section-label">Recorded Here</div>
+  <p style="font-family:'DM Mono',monospace;font-size:11px;letter-spacing:0.2em;color:var(--muted);max-width:480px;line-height:1.8;">
+    A partial list of artists and producers who have recorded, mixed, or rehearsed at Fresh Ground Sound and its predecessor studios since 1983.
+  </p>
+
+  <div class="artists-grid">
+    <div class="artist-card reveal"><div class="artist-name">Kanye West</div><div class="artist-type">Recording Artist</div></div>
+    <div class="artist-card reveal" style="transition-delay:.05s"><div class="artist-name">Carti B.</div><div class="artist-type">Recording Artist</div></div>
+    <div class="artist-card reveal" style="transition-delay:.1s"><div class="artist-name">Howard Leese</div><div class="artist-type">Guitarist · Heart</div></div>
+    <div class="artist-card reveal" style="transition-delay:.15s"><div class="artist-name">David Lombardo</div><div class="artist-type">Drummer · Slayer</div></div>
+    <div class="artist-card reveal" style="transition-delay:.2s"><div class="artist-name">Kevin Schreutelka</div><div class="artist-type">Recording Artist</div></div>
+    <div class="artist-card reveal" style="transition-delay:.05s"><div class="artist-name">Sabina Chantouria</div><div class="artist-type">Recording Artist</div></div>
+    <div class="artist-card reveal" style="transition-delay:.1s"><div class="artist-name">Ratta Blanca</div><div class="artist-type">Rock Band</div></div>
+    <div class="artist-card reveal" style="transition-delay:.15s"><div class="artist-name">Heaven and Earth</div><div class="artist-type">Rock Band</div></div>
+    <div class="artist-card reveal" style="transition-delay:.2s"><div class="artist-name">Katja Rieckerman</div><div class="artist-type">Recording Artist</div></div>
+    <div class="artist-card reveal" style="transition-delay:.05s"><div class="artist-name">Rip Carson</div><div class="artist-type">Recording Artist</div></div>
+    <div class="artist-card reveal" style="transition-delay:.1s"><div class="artist-name">Roni Lee</div><div class="artist-type">Recording Artist</div></div>
+    <div class="artist-card reveal" style="transition-delay:.15s"><div class="artist-name">Dillinger Steele</div><div class="artist-type">Recording Artist</div></div>
+    <div class="artist-card reveal" style="transition-delay:.2s"><div class="artist-name">Jamie Kime</div><div class="artist-type">Guitarist</div></div>
+    <div class="artist-card reveal" style="transition-delay:.05s"><div class="artist-name">Danny Nova</div><div class="artist-type">Recording Artist</div></div>
+    <div class="artist-card reveal" style="transition-delay:.1s"><div class="artist-name">Mighty Cash Cats</div><div class="artist-type">Band</div></div>
+    <div class="artist-card reveal" style="transition-delay:.15s"><div class="artist-name">Jeremiah Samuels</div><div class="artist-type">Recording Artist</div></div>
+    <div class="artist-card reveal" style="transition-delay:.2s"><div class="artist-name">Doug Pettibone</div><div class="artist-type">Guitarist / Producer</div></div>
+  </div>
+</section>
+
+<section class="section" style="padding-top:0">
+  <div style="background:var(--warm-dark);border:1px solid var(--hairline);padding:48px;max-width:600px;" class="reveal">
+    <div class="section-label">Your Name Here</div>
+    <h2 style="font-family:'Bebas Neue',sans-serif;font-size:36px;color:var(--cream);margin-bottom:16px;">Ready to Make<br><span style="color:var(--amber);">Your Record?</span></h2>
+    <p style="font-size:15px;line-height:1.75;color:var(--muted);margin-bottom:28px;">The same room. The same gear. The same ears. Your music deserves it.</p>
+    <a href="contact.html" class="btn-primary">Book a Session</a>
+  </div>
+</section>
+
+<footer>
+  <div class="footer-grid">
+    <div class="footer-brand"><div class="logo">Fresh Ground Sound</div><div class="tagline">Ventura, California · Est. 1983</div><p>Professional recording, rehearsal, and live sound production on the coast of Southern California.</p></div>
+    <div class="footer-col"><h4>Navigate</h4><ul><li><a href="index.html">Home</a></li><li><a href="artists.html">Artists</a></li><li><a href="equipment.html">Equipment</a></li><li><a href="about.html">About</a></li><li><a href="contact.html">Book</a></li></ul></div>
+    <div class="footer-col"><h4>Services</h4><ul><li><a href="equipment.html">Recording — $60/hr</a></li><li><a href="equipment.html">Rehearsal — $30/hr</a></li><li><a href="contact.html">Live Sound</a></li></ul></div>
+    <div class="footer-col"><h4>Contact</h4><p>3740 Transport Street<br>Ventura, CA 93003<br><br><a href="tel:8056442579">(805) 644-2579</a><br><a href="mailto:Freshgroundsound@gmail.com">Freshgroundsound@gmail.com</a></p></div>
+  </div>
+  <div class="footer-bottom"><p>© 2025 Fresh Ground Records</p><p>3740 Transport Street · Ventura, CA 93003</p></div>
+</footer>
+
+<script src="assets/nav.js"></script>
+</body>
+</html>

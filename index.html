@@ -1,0 +1,542 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Fresh Ground Sound — Ventura, California Recording Studio</title>
+<meta name="description" content="Professional recording, live sound, and rehearsal studio in Ventura, CA. SSL console, vintage gear, experienced engineers. Est. 1983.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Lora:ital,wght@0,400;0,500;1,400&family=DM+Mono:wght@300;400&display=swap" rel="stylesheet">
+<style>
+:root{--black:#0a0908;--deep:#111010;--warm-dark:#1a1714;--tape:#c17f3b;--amber:#e8a84c;--cream:#f0e6d3;--muted:#8a7d6e;--hairline:rgba(193,127,59,0.2);--glow:rgba(232,168,76,0.07);}
+*,*::before,*::after{margin:0;padding:0;box-sizing:border-box;}
+html{scroll-behavior:smooth;}
+body{background:var(--black);color:var(--cream);font-family:'Lora',serif;overflow-x:hidden;cursor:none;}
+.cursor{width:8px;height:8px;background:var(--amber);border-radius:50%;position:fixed;pointer-events:none;z-index:9999;transform:translate(-50%,-50%);mix-blend-mode:difference;}
+.cursor-ring{width:32px;height:32px;border:1px solid var(--tape);border-radius:50%;position:fixed;pointer-events:none;z-index:9998;transform:translate(-50%,-50%);opacity:.6;}
+.reveal{opacity:0;transform:translateY(28px);transition:opacity .7s ease,transform .7s ease;}
+.reveal.visible{opacity:1;transform:translateY(0);}
+.btn-primary{font-family:'DM Mono',monospace;font-size:11px;letter-spacing:.25em;text-transform:uppercase;color:var(--black);background:var(--amber);padding:14px 32px;text-decoration:none;display:inline-block;border:none;cursor:none;transition:background .3s,transform .2s;}
+.btn-primary:hover{background:var(--cream);transform:translateY(-2px);}
+.btn-ghost{font-family:'DM Mono',monospace;font-size:11px;letter-spacing:.25em;text-transform:uppercase;color:var(--tape);text-decoration:none;display:inline-flex;align-items:center;gap:8px;border:none;background:none;cursor:none;transition:color .3s;}
+.btn-ghost::after{content:'→';}
+.btn-ghost:hover{color:var(--cream);}
+.section-label{font-family:'DM Mono',monospace;font-size:10px;letter-spacing:.4em;color:var(--tape);text-transform:uppercase;margin-bottom:16px;display:flex;align-items:center;gap:16px;}
+.section-label::before{content:'';display:block;width:32px;height:1px;background:var(--tape);}
+
+/* NAV */
+nav{position:fixed;top:0;left:0;right:0;z-index:500;padding:22px 48px;display:flex;justify-content:space-between;align-items:center;background:linear-gradient(to bottom,rgba(10,9,8,.97),transparent);backdrop-filter:blur(4px);border-bottom:1px solid transparent;transition:border-color .3s,background .3s;}
+nav.scrolled{border-bottom-color:var(--hairline);background:rgba(10,9,8,.97);}
+.nav-logo{font-family:'Bebas Neue',sans-serif;font-size:20px;letter-spacing:.15em;color:var(--amber);text-decoration:none;display:flex;flex-direction:column;line-height:1;}
+.nav-logo span{font-family:'DM Mono',monospace;font-size:8px;letter-spacing:.35em;color:var(--muted);font-weight:300;margin-top:4px;}
+.nav-links{display:flex;gap:36px;list-style:none;}
+.nav-links a{font-family:'DM Mono',monospace;font-size:10px;letter-spacing:.25em;color:var(--muted);text-decoration:none;text-transform:uppercase;transition:color .3s;position:relative;}
+.nav-links a::after{content:'';position:absolute;bottom:-4px;left:0;right:0;height:1px;background:var(--amber);transform:scaleX(0);transition:transform .3s;transform-origin:left;}
+.nav-links a:hover{color:var(--cream);}
+.nav-links a:hover::after{transform:scaleX(1);}
+.nav-phone{font-family:'DM Mono',monospace;font-size:11px;letter-spacing:.1em;color:var(--tape);text-decoration:none;transition:color .3s;}
+.nav-phone:hover{color:var(--amber);}
+
+/* HERO */
+#hero{height:100vh;position:relative;overflow:hidden;display:flex;align-items:flex-end;}
+.carousel{position:absolute;inset:0;}
+.carousel-track{display:flex;height:100%;transition:transform .9s cubic-bezier(.77,0,.18,1);}
+.carousel-slide{min-width:100%;height:100%;position:relative;overflow:hidden;}
+.carousel-slide img{width:100%;height:100%;object-fit:cover;transform:scale(1.05);transition:transform 6s ease;filter:brightness(.45);}
+.carousel-slide.active img{transform:scale(1);}
+.car-overlay{position:absolute;inset:0;background:linear-gradient(to top,rgba(10,9,8,.95) 0%,rgba(10,9,8,.25) 50%,rgba(10,9,8,.45) 100%),linear-gradient(to right,rgba(10,9,8,.55) 0%,transparent 60%);}
+.car-dots{position:absolute;bottom:48px;right:48px;display:flex;gap:8px;z-index:10;}
+.car-dot{width:24px;height:2px;background:rgba(240,230,211,.2);border:none;cursor:none;transition:background .3s,width .3s;}
+.car-dot.active{background:var(--amber);width:40px;}
+.car-arrows{position:absolute;bottom:40px;left:48px;display:flex;gap:12px;z-index:10;}
+.car-arrow{width:40px;height:40px;border:1px solid var(--hairline);background:transparent;color:var(--muted);font-size:16px;cursor:none;display:flex;align-items:center;justify-content:center;transition:border-color .3s,color .3s;}
+.car-arrow:hover{border-color:var(--amber);color:var(--amber);}
+.vu-bars{position:absolute;right:80px;top:50%;transform:translateY(-60%);display:flex;gap:5px;align-items:flex-end;height:220px;opacity:.12;z-index:4;}
+.vu-bar{width:4px;background:linear-gradient(to top,var(--tape),var(--amber));border-radius:2px;animation:vu 1.4s ease-in-out infinite alternate;}
+@keyframes vu{0%{transform:scaleY(.25);opacity:.3;}100%{transform:scaleY(1);opacity:1;}}
+.hero-content{position:relative;z-index:5;padding:0 48px 140px;max-width:800px;}
+.hero-label{font-family:'DM Mono',monospace;font-size:10px;letter-spacing:.4em;color:var(--tape);text-transform:uppercase;margin-bottom:20px;display:flex;align-items:center;gap:16px;opacity:0;animation:fadeUp .8s ease forwards .3s;}
+.hero-label::before{content:'';display:block;width:40px;height:1px;background:var(--tape);}
+.hero-title{font-family:'Bebas Neue',sans-serif;font-size:clamp(56px,9vw,128px);line-height:.88;letter-spacing:.02em;color:var(--cream);margin-bottom:28px;opacity:0;animation:fadeUp .8s ease forwards .5s;}
+.hero-title .accent{color:var(--amber);}
+.hero-sub{font-size:16px;line-height:1.75;color:var(--muted);font-style:italic;max-width:440px;margin-bottom:36px;opacity:0;animation:fadeUp .8s ease forwards .7s;}
+.hero-actions{display:flex;gap:24px;align-items:center;opacity:0;animation:fadeUp .8s ease forwards .9s;}
+@keyframes fadeUp{from{opacity:0;transform:translateY(24px);}to{opacity:1;transform:translateY(0);}}
+
+/* SERVICES */
+.services-strip{display:grid;grid-template-columns:repeat(3,1fr);}
+.svc{padding:52px 44px;border:1px solid var(--hairline);border-left:none;border-top:none;position:relative;overflow:hidden;transition:background .3s;}
+.svc:first-child{border-left:1px solid var(--hairline);}
+.svc::before{content:'';position:absolute;inset:0;background:var(--glow);opacity:0;transition:opacity .4s;}
+.svc:hover::before{opacity:1;}
+.svc-icon{font-size:28px;margin-bottom:18px;display:block;}
+.svc h3{font-family:'Bebas Neue',sans-serif;font-size:28px;letter-spacing:.08em;color:var(--cream);margin-bottom:8px;}
+.svc .rate{font-family:'Bebas Neue',sans-serif;font-size:22px;color:var(--amber);margin-bottom:12px;}
+.svc p{font-size:14px;line-height:1.75;color:var(--muted);}
+
+/* MARQUEE */
+.marquee-wrap{border-top:1px solid var(--hairline);border-bottom:1px solid var(--hairline);padding:18px 0;overflow:hidden;background:var(--warm-dark);}
+.marquee-track{display:flex;gap:56px;animation:marquee 30s linear infinite;white-space:nowrap;}
+.marquee-track:hover{animation-play-state:paused;}
+.mq-item{font-family:'Bebas Neue',sans-serif;font-size:17px;letter-spacing:.15em;color:var(--muted);transition:color .3s;}
+.mq-item:hover{color:var(--amber);}
+.mq-sep{color:var(--tape);opacity:.4;}
+@keyframes marquee{0%{transform:translateX(0);}100%{transform:translateX(-50%);}}
+
+/* BOOKING */
+#booking{padding:96px 48px;background:var(--warm-dark);position:relative;overflow:hidden;}
+.booking-intro{display:flex;justify-content:space-between;align-items:flex-end;margin-bottom:40px;gap:32px;flex-wrap:wrap;}
+.booking-intro h2{font-family:'Bebas Neue',sans-serif;font-size:clamp(40px,5vw,64px);line-height:.92;color:var(--cream);}
+.booking-intro h2 .accent{color:var(--amber);}
+.booking-intro p{font-size:16px;line-height:1.75;color:var(--muted);font-style:italic;max-width:380px;}
+
+/* CALENDAR */
+.custom-cal{background:var(--deep);border:1px solid var(--hairline);margin-bottom:40px;}
+.cal-header{padding:16px 24px;background:var(--black);border-bottom:1px solid var(--hairline);display:flex;align-items:center;justify-content:space-between;gap:16px;flex-wrap:wrap;}
+.cal-header-left{display:flex;align-items:center;gap:14px;}
+.cal-title{font-family:'Lora',serif;font-size:20px;font-weight:500;color:var(--cream);min-width:220px;}
+.cal-nav{background:none;border:1px solid var(--hairline);color:var(--muted);width:38px;height:38px;display:flex;align-items:center;justify-content:center;font-size:16px;cursor:none;transition:border-color .2s,color .2s,background .2s;}
+.cal-nav:hover{border-color:var(--amber);color:var(--amber);background:rgba(232,168,76,.06);}
+.cal-tabs{display:flex;gap:4px;}
+.cal-tab{font-family:'Lora',serif;font-size:15px;font-style:italic;padding:8px 22px;border:1px solid var(--hairline);background:transparent;color:var(--muted);cursor:none;transition:all .25s;}
+.cal-tab.active{background:var(--amber);border-color:var(--amber);color:var(--black);font-style:normal;font-weight:500;}
+.cal-tab:hover:not(.active){border-color:var(--tape);color:var(--cream);}
+.cal-legend{display:flex;align-items:center;gap:20px;}
+.cal-legend-item{display:flex;align-items:center;gap:8px;font-family:'Lora',serif;font-size:14px;color:var(--muted);}
+.cal-dot-l{width:10px;height:10px;border-radius:3px;}
+.dot-booked{background:rgba(193,127,59,.5);border-left:3px solid var(--tape);}
+.dot-open{background:rgba(240,230,211,.06);border:1px solid var(--hairline);}
+.cal-live{width:7px;height:7px;border-radius:50%;background:var(--amber);animation:blink 2s infinite;}
+@keyframes blink{0%,100%{opacity:1;}50%{opacity:.3;}}
+
+/* MONTH VIEW */
+#calMonth{display:block;}
+#calWeek{display:none;}
+.month-head{display:grid;grid-template-columns:repeat(7,1fr);background:var(--black);border-bottom:1px solid var(--hairline);}
+.month-dname{font-family:'Lora',serif;font-size:14px;font-style:italic;color:var(--muted);text-align:center;padding:14px 8px;}
+.month-grid{display:grid;grid-template-columns:repeat(7,1fr);}
+.month-cell{min-height:110px;border-right:1px solid var(--hairline);border-bottom:1px solid var(--hairline);padding:10px;transition:background .2s;}
+.month-cell:nth-child(7n){border-right:none;}
+.month-cell:hover{background:rgba(255,255,255,.018);}
+.month-cell.other-month{opacity:.3;}
+.month-cell.today{background:rgba(232,168,76,.07);}
+.month-num{font-family:'Lora',serif;font-size:15px;font-weight:500;color:var(--cream);width:30px;height:30px;display:flex;align-items:center;justify-content:center;border-radius:50%;margin-bottom:6px;}
+.month-cell.today .month-num{background:var(--amber);color:var(--black);}
+.month-event{font-family:'Lora',serif;font-size:12px;color:var(--cream);background:rgba(193,127,59,.22);border-left:3px solid var(--tape);padding:3px 8px;margin-bottom:3px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;border-radius:0 2px 2px 0;}
+
+/* WEEK VIEW */
+.week-grid{display:grid;grid-template-columns:72px repeat(7,1fr);}
+.week-col-head{font-family:'Lora',serif;font-size:13px;color:var(--muted);text-align:center;padding:14px 4px;line-height:1.5;border-bottom:1px solid var(--hairline);border-right:1px solid var(--hairline);background:var(--black);}
+.week-col-head:last-child{border-right:none;}
+.week-col-head .dname{font-style:italic;display:block;}
+.week-col-head .dnum{font-size:20px;font-weight:500;color:var(--cream);display:block;margin-top:2px;}
+.week-col-head.is-today .dnum{background:var(--amber);color:var(--black);border-radius:50%;width:34px;height:34px;display:flex;align-items:center;justify-content:center;margin:2px auto 0;}
+.week-time{font-family:'Lora',serif;font-size:13px;font-style:italic;color:var(--muted);text-align:right;padding-right:12px;height:60px;display:flex;align-items:flex-start;justify-content:flex-end;padding-top:5px;border-right:1px solid var(--hairline);border-bottom:1px solid rgba(193,127,59,.08);}
+.week-day-col{border-right:1px solid var(--hairline);position:relative;}
+.week-day-col:last-child{border-right:none;}
+.week-slot{height:60px;border-bottom:1px solid rgba(193,127,59,.08);position:relative;}
+.week-event{position:absolute;left:3px;right:3px;background:rgba(193,127,59,.28);border-left:3px solid var(--amber);padding:4px 8px;font-family:'Lora',serif;font-size:12px;color:var(--cream);overflow:hidden;text-overflow:ellipsis;white-space:nowrap;z-index:2;border-radius:0 2px 2px 0;}
+
+/* RATES */
+.rates-strip{display:grid;grid-template-columns:repeat(4,1fr);gap:1px;background:var(--hairline);border:1px solid var(--hairline);margin-bottom:32px;}
+.rate-card{background:var(--black);padding:24px 28px;transition:background .3s;}
+.rate-card:hover{background:var(--warm-dark);}
+.rate-label{font-family:'Lora',serif;font-size:14px;font-style:italic;color:var(--muted);margin-bottom:6px;}
+.rate-price{font-family:'Bebas Neue',sans-serif;font-size:34px;color:var(--amber);letter-spacing:.04em;line-height:1;}
+.rate-price small{font-size:16px;color:var(--muted);font-family:'Lora',serif;}
+.booking-cta{display:flex;gap:20px;flex-wrap:wrap;align-items:center;}
+
+/* INSTAGRAM */
+#instagram{padding:96px 48px;border-top:1px solid var(--hairline);}
+.ig-header{display:flex;justify-content:space-between;align-items:flex-end;margin-bottom:40px;}
+.ig-handle{font-family:'DM Mono',monospace;font-size:11px;letter-spacing:.2em;color:var(--tape);}
+.ig-title{font-family:'Bebas Neue',sans-serif;font-size:clamp(32px,4vw,52px);color:var(--cream);line-height:1;}
+.ig-title .accent{color:var(--amber);}
+.ig-grid{display:grid;grid-template-columns:repeat(6,1fr);gap:4px;margin-bottom:32px;}
+.ig-post{aspect-ratio:1;overflow:hidden;position:relative;cursor:none;background:var(--warm-dark);}
+.ig-post img{width:100%;height:100%;object-fit:cover;transition:transform .4s,filter .4s;filter:brightness(.8) saturate(.9);}
+.ig-overlay{position:absolute;inset:0;background:rgba(10,9,8,.7);display:flex;align-items:center;justify-content:center;opacity:0;transition:opacity .3s;}
+.ig-post:hover img{transform:scale(1.08);filter:brightness(.55) saturate(1.1);}
+.ig-post:hover .ig-overlay{opacity:1;}
+.ig-overlay span{font-family:'Lora',serif;font-size:13px;font-style:italic;color:var(--cream);}
+.ig-follow{display:flex;justify-content:center;}
+.ig-follow a{font-family:'DM Mono',monospace;font-size:11px;letter-spacing:.25em;text-transform:uppercase;color:var(--cream);border:1px solid var(--hairline);padding:14px 40px;text-decoration:none;display:inline-flex;align-items:center;gap:12px;transition:border-color .3s,color .3s;}
+.ig-follow a:hover{border-color:var(--amber);color:var(--amber);}
+
+/* CHAT */
+.chat-fab{position:fixed;bottom:32px;right:32px;z-index:800;display:flex;flex-direction:column;align-items:flex-end;gap:10px;}
+.chat-fab-label{font-family:'DM Mono',monospace;font-size:9px;letter-spacing:.25em;color:var(--muted);background:rgba(10,9,8,.85);padding:4px 10px;border:1px solid var(--hairline);}
+#chatToggle{width:60px;height:60px;border-radius:50%;background:var(--amber);border:none;cursor:none;font-size:22px;display:flex;align-items:center;justify-content:center;box-shadow:0 8px 32px rgba(232,168,76,.3);transition:transform .3s,box-shadow .3s;position:relative;}
+#chatToggle:hover{transform:scale(1.08);}
+.chat-badge{position:absolute;top:-3px;right:-3px;width:14px;height:14px;background:#c0392b;border-radius:50%;border:2px solid var(--black);animation:blink 2s infinite;}
+#chatWidget{position:fixed;bottom:104px;right:32px;width:360px;background:var(--deep);border:1px solid var(--hairline);display:flex;flex-direction:column;z-index:801;transform:translateY(20px) scale(.95);opacity:0;pointer-events:none;transition:all .35s cubic-bezier(.34,1.56,.64,1);box-shadow:0 24px 80px rgba(0,0,0,.6);}
+#chatWidget.open{transform:translateY(0) scale(1);opacity:1;pointer-events:all;}
+.chat-head{padding:14px 18px;background:var(--black);border-bottom:1px solid var(--hairline);display:flex;align-items:center;justify-content:space-between;}
+.chat-head-info{display:flex;align-items:center;gap:12px;}
+.chat-avatar{width:32px;height:32px;border-radius:50%;background:linear-gradient(135deg,var(--tape),var(--amber));display:flex;align-items:center;justify-content:center;font-size:14px;}
+.chat-head-text h4{font-family:'DM Mono',monospace;font-size:11px;letter-spacing:.15em;color:var(--cream);}
+.chat-head-text p{font-family:'DM Mono',monospace;font-size:9px;color:var(--tape);margin-top:2px;}
+#chatClose{background:none;border:none;color:var(--muted);cursor:none;font-size:18px;transition:color .2s;}
+#chatClose:hover{color:var(--cream);}
+.chat-chips{padding:10px 14px;display:flex;gap:6px;flex-wrap:wrap;border-bottom:1px solid var(--hairline);}
+.chat-chip{font-family:'DM Mono',monospace;font-size:9px;color:var(--tape);border:1px solid var(--hairline);background:transparent;padding:5px 10px;cursor:none;transition:border-color .2s,color .2s;}
+.chat-chip:hover{border-color:var(--tape);color:var(--cream);}
+#chatMessages{flex:1;overflow-y:auto;padding:14px;display:flex;flex-direction:column;gap:10px;min-height:220px;max-height:280px;}
+#chatMessages::-webkit-scrollbar{width:3px;}
+#chatMessages::-webkit-scrollbar-thumb{background:var(--hairline);}
+.chat-msg{display:flex;}
+.chat-msg.user{justify-content:flex-end;}
+.chat-bubble{max-width:82%;padding:10px 14px;font-family:'Lora',serif;font-size:13px;line-height:1.6;}
+.chat-msg.user .chat-bubble{background:var(--amber);color:var(--black);}
+.chat-msg.bot .chat-bubble{background:var(--warm-dark);border:1px solid var(--hairline);color:var(--cream);}
+.chat-msg.bot .chat-bubble a{color:var(--amber);text-decoration:none;}
+.typing .chat-bubble{display:flex;gap:4px;align-items:center;padding:14px 18px;}
+.typing .chat-bubble span{width:6px;height:6px;background:var(--muted);border-radius:50%;animation:typ 1.2s infinite;}
+.typing .chat-bubble span:nth-child(2){animation-delay:.2s;}
+.typing .chat-bubble span:nth-child(3){animation-delay:.4s;}
+@keyframes typ{0%,60%,100%{transform:translateY(0);opacity:.4;}30%{transform:translateY(-6px);opacity:1;}}
+.chat-input-row{padding:10px 14px;display:flex;gap:8px;border-top:1px solid var(--hairline);background:var(--black);}
+#chatInput{flex:1;background:var(--warm-dark);border:1px solid var(--hairline);color:var(--cream);font-family:'Lora',serif;font-size:13px;padding:10px 12px;outline:none;resize:none;transition:border-color .2s;}
+#chatInput:focus{border-color:var(--tape);}
+#chatInput::placeholder{color:var(--muted);font-style:italic;}
+#chatSend{background:var(--amber);border:none;color:var(--black);width:40px;font-size:16px;cursor:none;transition:background .2s;flex-shrink:0;}
+#chatSend:hover{background:var(--cream);}
+#chatSend:disabled{opacity:.4;}
+.gemini-badge{padding:5px 14px;text-align:center;font-family:'DM Mono',monospace;font-size:8px;letter-spacing:.2em;color:var(--muted);border-top:1px solid var(--hairline);}
+
+/* FOOTER */
+footer{background:var(--deep);border-top:1px solid var(--hairline);padding:64px 48px 40px;}
+.footer-grid{display:grid;grid-template-columns:2fr 1fr 1fr 1fr;gap:48px;margin-bottom:48px;}
+.footer-logo{font-family:'Bebas Neue',sans-serif;font-size:26px;letter-spacing:.15em;color:var(--amber);margin-bottom:6px;}
+.footer-tagline{font-family:'DM Mono',monospace;font-size:9px;letter-spacing:.3em;color:var(--muted);text-transform:uppercase;margin-bottom:18px;}
+.footer-brand p{font-size:14px;line-height:1.75;color:var(--muted);max-width:270px;}
+.footer-col h4{font-family:'DM Mono',monospace;font-size:10px;letter-spacing:.3em;color:var(--tape);text-transform:uppercase;margin-bottom:18px;}
+.footer-col ul{list-style:none;}
+.footer-col ul li{margin-bottom:9px;}
+.footer-col ul li a,.footer-col p a{font-size:14px;color:var(--muted);text-decoration:none;transition:color .3s;}
+.footer-col ul li a:hover,.footer-col p a:hover{color:var(--cream);}
+.footer-col p{font-size:14px;color:var(--muted);line-height:1.85;}
+.footer-bottom{display:flex;justify-content:space-between;align-items:center;padding-top:28px;border-top:1px solid var(--hairline);}
+.footer-bottom p{font-family:'DM Mono',monospace;font-size:10px;letter-spacing:.14em;color:var(--muted);}
+
+@media(max-width:900px){nav{padding:18px 24px;}.nav-links{display:none;}.hero-content{padding:0 24px 120px;}.services-strip{grid-template-columns:1fr;}.svc{border-left:1px solid var(--hairline);}#booking{padding:64px 24px;}.ig-grid{grid-template-columns:repeat(3,1fr);}.rates-strip{grid-template-columns:repeat(2,1fr);}.footer-grid{grid-template-columns:1fr;gap:32px;}.footer-bottom{flex-direction:column;gap:10px;text-align:center;}#chatWidget{width:calc(100vw - 32px);right:16px;}}
+@media(max-width:600px){.ig-grid{grid-template-columns:repeat(2,1fr);}.rates-strip{grid-template-columns:1fr;}.booking-intro{flex-direction:column;}.ig-header{flex-direction:column;align-items:flex-start;gap:12px;}}
+</style>
+</head>
+<body>
+<div class="cursor"></div>
+<div class="cursor-ring"></div>
+
+<nav>
+  <a href="index.html" class="nav-logo">Fresh Ground Sound<span>Ventura, California</span></a>
+  <ul class="nav-links">
+    <li><a href="index.html">Home</a></li>
+    <li><a href="artists.html">Artists</a></li>
+    <li><a href="equipment.html">Equipment</a></li>
+    <li><a href="about.html">About</a></li>
+    <li><a href="contact.html">Book a Session</a></li>
+  </ul>
+  <a href="tel:8056442579" class="nav-phone">(805) 644-2579</a>
+</nav>
+
+<section id="hero">
+  <div class="carousel">
+    <div class="carousel-track" id="carTrack">
+      <div class="carousel-slide active"><img src="https://images.unsplash.com/photo-1598488035139-bdbb2231ce04?w=1600&q=80" alt="Recording studio console"></div>
+      <div class="carousel-slide"><img src="https://images.unsplash.com/photo-1520523839897-bd0b52f945a0?w=1600&q=80" alt="Studio microphone"></div>
+      <div class="carousel-slide"><img src="https://images.unsplash.com/photo-1571330735066-03aaa9429d89?w=1600&q=80" alt="Outboard gear rack"></div>
+      <div class="carousel-slide"><img src="https://images.unsplash.com/photo-1459233313842-cd392ee2c388?w=1600&q=80" alt="Rehearsal room drums"></div>
+      <div class="carousel-slide"><img src="https://images.unsplash.com/photo-1507838153414-b4b713384a76?w=1600&q=80" alt="Piano room"></div>
+    </div>
+    <div class="car-overlay"></div>
+  </div>
+  <div class="vu-bars" aria-hidden="true">
+    <div class="vu-bar" style="animation-delay:0s;height:40%"></div>
+    <div class="vu-bar" style="animation-delay:.1s;height:70%"></div>
+    <div class="vu-bar" style="animation-delay:.2s;height:55%"></div>
+    <div class="vu-bar" style="animation-delay:.05s;height:85%"></div>
+    <div class="vu-bar" style="animation-delay:.3s;height:45%"></div>
+    <div class="vu-bar" style="animation-delay:.15s;height:90%"></div>
+    <div class="vu-bar" style="animation-delay:.25s;height:60%"></div>
+    <div class="vu-bar" style="animation-delay:.08s;height:75%"></div>
+    <div class="vu-bar" style="animation-delay:.35s;height:35%"></div>
+    <div class="vu-bar" style="animation-delay:.18s;height:80%"></div>
+    <div class="vu-bar" style="animation-delay:.28s;height:50%"></div>
+    <div class="vu-bar" style="animation-delay:.12s;height:65%"></div>
+  </div>
+  <div class="hero-content">
+    <p class="hero-label">Est. 1983 &middot; Ventura, California</p>
+    <h1 class="hero-title">Fresh<br>Ground<br><span class="accent">Sound.</span></h1>
+    <p class="hero-sub">Recording &middot; Live Sound Production &middot; Rehearsal<br>Where Ventura's music gets made.</p>
+    <div class="hero-actions">
+      <a href="contact.html" class="btn-primary">Book a Session</a>
+      <a href="#booking" class="btn-ghost">Check Availability</a>
+    </div>
+  </div>
+  <div class="car-arrows">
+    <button class="car-arrow" id="carPrev">&#8592;</button>
+    <button class="car-arrow" id="carNext">&#8594;</button>
+  </div>
+  <div class="car-dots" id="carDots"></div>
+</section>
+
+<div class="services-strip">
+  <div class="svc reveal"><span class="svc-icon">&#127932;</span><h3>Recording</h3><div class="rate">$60 / hr</div><p>SSL-XL console, Pro Tools, UAD processing, vintage outboard. Tracking, overdubbing, and mixing with experienced engineers.</p></div>
+  <div class="svc reveal" style="transition-delay:.1s"><span class="svc-icon">&#127928;</span><h3>Rehearsal</h3><div class="rate">$30 / hr</div><p>Full PA, drum kit, bass cab. 20x15 room with 16ft ceilings. Book from 11am-10pm, 3-hour minimum weeknights.</p></div>
+  <div class="svc reveal" style="transition-delay:.2s"><span class="svc-icon">&#127908;</span><h3>Live Sound</h3><div class="rate">Inquire</div><p>Live sound production services for events, showcases, and performances. Contact us for rates and availability.</p></div>
+</div>
+
+<div class="marquee-wrap">
+  <div class="marquee-track">
+    <span class="mq-item">Kanye West</span><span class="mq-sep"> &middot; </span><span class="mq-item">Howard Leese</span><span class="mq-sep"> &middot; </span><span class="mq-item">David Lombardo</span><span class="mq-sep"> &middot; </span><span class="mq-item">Ratta Blanca</span><span class="mq-sep"> &middot; </span><span class="mq-item">Heaven and Earth</span><span class="mq-sep"> &middot; </span><span class="mq-item">Jamie Kime</span><span class="mq-sep"> &middot; </span><span class="mq-item">Doug Pettibone</span><span class="mq-sep"> &middot; </span><span class="mq-item">Roni Lee</span><span class="mq-sep"> &middot; </span><span class="mq-item">Dillinger Steele</span><span class="mq-sep"> &middot; </span><span class="mq-item">Carti B.</span><span class="mq-sep"> &middot; </span><span class="mq-item">Mighty Cash Cats</span><span class="mq-sep"> &middot; </span><span class="mq-item">Jeremiah Samuels</span><span class="mq-sep"> &middot; </span>
+    <span class="mq-item">Kanye West</span><span class="mq-sep"> &middot; </span><span class="mq-item">Howard Leese</span><span class="mq-sep"> &middot; </span><span class="mq-item">David Lombardo</span><span class="mq-sep"> &middot; </span><span class="mq-item">Ratta Blanca</span><span class="mq-sep"> &middot; </span><span class="mq-item">Heaven and Earth</span><span class="mq-sep"> &middot; </span><span class="mq-item">Jamie Kime</span><span class="mq-sep"> &middot; </span><span class="mq-item">Doug Pettibone</span><span class="mq-sep"> &middot; </span><span class="mq-item">Roni Lee</span><span class="mq-sep"> &middot; </span><span class="mq-item">Dillinger Steele</span><span class="mq-sep"> &middot; </span><span class="mq-item">Carti B.</span><span class="mq-sep"> &middot; </span><span class="mq-item">Mighty Cash Cats</span><span class="mq-sep"> &middot; </span><span class="mq-item">Jeremiah Samuels</span><span class="mq-sep"> &middot; </span>
+  </div>
+</div>
+
+<section id="booking">
+  <div class="booking-intro reveal">
+    <div>
+      <div class="section-label">Studio Availability</div>
+      <h2>Check the<br><span class="accent">Calendar</span></h2>
+    </div>
+    <p>Open slots are ready to book. Recording from $60/hr, rehearsal from $30/hr. Call, text, or fill out the booking form below.</p>
+  </div>
+  <div class="custom-cal reveal" style="transition-delay:.1s">
+    <div class="cal-header">
+      <div class="cal-header-left">
+        <button class="cal-nav" id="calPrev">&#8592;</button>
+        <span class="cal-title" id="calTitle"></span>
+        <button class="cal-nav" id="calNext">&#8594;</button>
+      </div>
+      <div class="cal-tabs">
+        <button class="cal-tab active" id="tabMonth" onclick="calSwitch('month')">Month</button>
+        <button class="cal-tab" id="tabWeek" onclick="calSwitch('week')">Week</button>
+      </div>
+      <div class="cal-legend">
+        <div class="cal-legend-item"><div class="cal-dot-l dot-booked"></div>Booked</div>
+        <div class="cal-legend-item"><div class="cal-dot-l dot-open"></div>Available</div>
+        <div class="cal-live"></div>
+      </div>
+    </div>
+    <div id="calMonth">
+      <div class="month-head">
+        <div class="month-dname">Sunday</div><div class="month-dname">Monday</div><div class="month-dname">Tuesday</div><div class="month-dname">Wednesday</div><div class="month-dname">Thursday</div><div class="month-dname">Friday</div><div class="month-dname">Saturday</div>
+      </div>
+      <div class="month-grid" id="monthGrid"></div>
+    </div>
+    <div id="calWeek">
+      <div class="week-grid" id="weekGrid"></div>
+    </div>
+  </div>
+  <div class="rates-strip reveal" style="transition-delay:.2s">
+    <div class="rate-card"><div class="rate-label">Recording per hour</div><div class="rate-price">$60 <small>/hr</small></div></div>
+    <div class="rate-card"><div class="rate-label">Rehearsal 3 hr minimum</div><div class="rate-price">$30 <small>/hr</small></div></div>
+    <div class="rate-card"><div class="rate-label">Rehearsal Day Lockout 12 hrs</div><div class="rate-price">$240</div></div>
+    <div class="rate-card"><div class="rate-label">Project &amp; Block Rates</div><div class="rate-price" style="font-size:22px;padding-top:8px;color:var(--tape)">Inquire</div></div>
+  </div>
+  <div class="booking-cta reveal" style="transition-delay:.3s">
+    <a href="contact.html" class="btn-primary">Request a Session</a>
+    <a href="tel:8056442579" class="btn-ghost">Call (805) 644-2579</a>
+    <a href="sms:8056442579" class="btn-ghost">Text Us</a>
+  </div>
+</section>
+
+<section id="instagram">
+  <div class="ig-header reveal">
+    <div>
+      <div class="section-label">Follow Along</div>
+      <div class="ig-title">Fresh Off<br>the <span class="accent">Feed</span></div>
+    </div>
+    <span class="ig-handle">@freshgroundsound</span>
+  </div>
+  <div class="ig-grid reveal" style="transition-delay:.1s">
+    <div class="ig-post"><img src="https://images.unsplash.com/photo-1598488035139-bdbb2231ce04?w=400&q=80" alt="Studio session"><div class="ig-overlay"><span>View Post</span></div></div>
+    <div class="ig-post"><img src="https://images.unsplash.com/photo-1520523839897-bd0b52f945a0?w=400&q=80" alt="Vocal booth"><div class="ig-overlay"><span>View Post</span></div></div>
+    <div class="ig-post"><img src="https://images.unsplash.com/photo-1571330735066-03aaa9429d89?w=400&q=80" alt="Tracking day"><div class="ig-overlay"><span>View Post</span></div></div>
+    <div class="ig-post"><img src="https://images.unsplash.com/photo-1459233313842-cd392ee2c388?w=400&q=80" alt="Rehearsal room"><div class="ig-overlay"><span>View Post</span></div></div>
+    <div class="ig-post"><img src="https://images.unsplash.com/photo-1493225457124-a3eb161ffa5f?w=400&q=80" alt="Band lockout"><div class="ig-overlay"><span>View Post</span></div></div>
+    <div class="ig-post"><img src="https://images.unsplash.com/photo-1507838153414-b4b713384a76?w=400&q=80" alt="Piano room"><div class="ig-overlay"><span>View Post</span></div></div>
+  </div>
+  <div class="ig-follow reveal" style="transition-delay:.2s">
+    <a href="https://instagram.com/freshgroundsound" target="_blank" rel="noopener">Follow @freshgroundsound</a>
+  </div>
+</section>
+
+<footer>
+  <div class="footer-grid">
+    <div class="footer-brand">
+      <div class="footer-logo">Fresh Ground Sound</div>
+      <div class="footer-tagline">Ventura, California &middot; Est. 1983</div>
+      <p>Professional recording, rehearsal, and live sound production on the coast of Southern California.</p>
+    </div>
+    <div class="footer-col"><h4>Navigate</h4><ul><li><a href="index.html">Home</a></li><li><a href="artists.html">Artists</a></li><li><a href="equipment.html">Equipment &amp; Rates</a></li><li><a href="about.html">About Us</a></li><li><a href="contact.html">Book a Session</a></li></ul></div>
+    <div class="footer-col"><h4>Services</h4><ul><li><a href="equipment.html">Recording &mdash; $60/hr</a></li><li><a href="equipment.html">Rehearsal &mdash; $30/hr</a></li><li><a href="contact.html">Live Sound</a></li><li><a href="contact.html">Block Rates</a></li></ul></div>
+    <div class="footer-col"><h4>Contact</h4><p>3740 Transport Street<br>Ventura, CA 93003<br><br><a href="tel:8056442579">(805) 644-2579</a><br><a href="mailto:Freshgroundsound@gmail.com">Freshgroundsound@gmail.com</a></p></div>
+  </div>
+  <div class="footer-bottom">
+    <p>&copy; 2025 Fresh Ground Records &mdash; All Rights Reserved</p>
+    <p>3740 Transport Street &middot; Ventura, California 93003</p>
+  </div>
+</footer>
+
+<div class="chat-fab">
+  <span class="chat-fab-label">Booking Assistant</span>
+  <button id="chatToggle" aria-label="Open booking assistant">&#127908;<div class="chat-badge"></div></button>
+</div>
+<div id="chatWidget" role="dialog" aria-label="Booking Assistant">
+  <div class="chat-head">
+    <div class="chat-head-info">
+      <div class="chat-avatar">&#127932;</div>
+      <div class="chat-head-text"><h4>Studio Assistant</h4><p>Powered by Gemini</p></div>
+    </div>
+    <button id="chatClose">&#10005;</button>
+  </div>
+  <div class="chat-chips">
+    <button class="chat-chip">Recording rates?</button>
+    <button class="chat-chip">What's included?</button>
+    <button class="chat-chip">Rehearsal hours?</button>
+    <button class="chat-chip">What gear do you have?</button>
+  </div>
+  <div id="chatMessages"></div>
+  <div class="chat-input-row">
+    <textarea id="chatInput" rows="1" placeholder="Ask about rates, gear, availability..."></textarea>
+    <button id="chatSend">&#8594;</button>
+  </div>
+  <div class="gemini-badge">Powered by Google Gemini AI</div>
+</div>
+
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+
+  // CURSOR
+  var cur = document.querySelector('.cursor'), ring = document.querySelector('.cursor-ring');
+  var mx=0,my=0,rx=0,ry=0;
+  document.addEventListener('mousemove',function(e){mx=e.clientX;my=e.clientY;cur.style.left=mx+'px';cur.style.top=my+'px';});
+  (function t(){rx+=(mx-rx)*.12;ry+=(my-ry)*.12;ring.style.left=rx+'px';ring.style.top=ry+'px';requestAnimationFrame(t);})();
+  document.querySelectorAll('a,button').forEach(function(el){
+    el.addEventListener('mouseenter',function(){cur.style.width='16px';cur.style.height='16px';ring.style.width='48px';ring.style.height='48px';ring.style.opacity='1';});
+    el.addEventListener('mouseleave',function(){cur.style.width='8px';cur.style.height='8px';ring.style.width='32px';ring.style.height='32px';ring.style.opacity='.6';});
+  });
+
+  // NAV
+  var nav=document.querySelector('nav');
+  window.addEventListener('scroll',function(){nav.classList.toggle('scrolled',window.scrollY>60);});
+
+  // REVEAL
+  var ro=new IntersectionObserver(function(entries){entries.forEach(function(e){if(e.isIntersecting){e.target.classList.add('visible');ro.unobserve(e.target);}});},{threshold:.1});
+  document.querySelectorAll('.reveal').forEach(function(el){ro.observe(el);});
+
+  // CAROUSEL
+  var track=document.getElementById('carTrack');
+  var slides=track.querySelectorAll('.carousel-slide');
+  var dotsEl=document.getElementById('carDots');
+  var ci=0,ct;
+  slides.forEach(function(_,i){var d=document.createElement('button');d.className='car-dot'+(i===0?' active':'');d.setAttribute('aria-label','Slide '+(i+1));d.addEventListener('click',function(){goTo(i);});dotsEl.appendChild(d);});
+  function goTo(n){slides[ci].classList.remove('active');dotsEl.children[ci].classList.remove('active');ci=(n+slides.length)%slides.length;track.style.transform='translateX(-'+(ci*100)+'%)';slides[ci].classList.add('active');dotsEl.children[ci].classList.add('active');}
+  function sa(){ct=setInterval(function(){goTo(ci+1);},5000);}
+  function sc(){clearInterval(ct);}
+  document.getElementById('carNext').addEventListener('click',function(){goTo(ci+1);sc();sa();});
+  document.getElementById('carPrev').addEventListener('click',function(){goTo(ci-1);sc();sa();});
+  sa();
+
+  // CALENDAR
+  var MO=['January','February','March','April','May','June','July','August','September','October','November','December'];
+  var DA=['Sun','Mon','Tue','Wed','Thu','Fri','Sat'];
+  var HR=[11,12,13,14,15,16,17,18,19,20,21];
+  var cv='month', cd=new Date();
+
+  function demo(from,to){
+    var ev=[],lb=['Recording Session','Band Rehearsal','Tracking Day','Mix Session','Overdubs','Full Band Lockout','Recording'],d=new Date(from),i=0;
+    while(d<to){
+      var s=Math.abs(Math.sin(d.getDate()*7+d.getMonth()*31));
+      if(s>0.58){var sh=11+Math.floor(Math.abs(Math.sin(d.getDate()*3))*7),dur=2+Math.floor(Math.abs(Math.cos(d.getDate()*5))*4),e=new Date(d),en=new Date(d);e.setHours(sh,0,0,0);en.setHours(sh+dur,0,0,0);ev.push({title:lb[i%lb.length],start:e,end:en});i++;}
+      d.setDate(d.getDate()+1);
+    }
+    return ev;
+  }
+
+  function renderMonth(){
+    var yr=cd.getFullYear(),mo=cd.getMonth();
+    document.getElementById('calTitle').textContent=MO[mo]+' '+yr;
+    var first=new Date(yr,mo,1),last=new Date(yr,mo+1,0);
+    var from=new Date(yr,mo,1-first.getDay()),to=new Date(yr,mo,last.getDate()+(6-last.getDay())+1);
+    var events=demo(from,to),grid=document.getElementById('monthGrid');
+    grid.innerHTML='';
+    var today=new Date();today.setHours(0,0,0,0);
+    var c=new Date(from);
+    while(c<to){
+      var cd2=new Date(c);cd2.setHours(0,0,0,0);
+      var cell=document.createElement('div');
+      cell.className='month-cell'+(c.getMonth()!==mo?' other-month':'')+(cd2.getTime()===today.getTime()?' today':'');
+      var num=document.createElement('div');num.className='month-num';num.textContent=c.getDate();cell.appendChild(num);
+      events.filter(function(e){var ed=new Date(e.start);ed.setHours(0,0,0,0);return ed.getTime()===cd2.getTime();}).slice(0,3).forEach(function(e){var ev=document.createElement('div');ev.className='month-event';ev.textContent=e.title;cell.appendChild(ev);});
+      grid.appendChild(cell);c.setDate(c.getDate()+1);
+    }
+  }
+
+  function renderWeek(){
+    var ws=new Date(cd);ws.setDate(cd.getDate()-cd.getDay());ws.setHours(0,0,0,0);
+    var we=new Date(ws);we.setDate(ws.getDate()+7);
+    var el=new Date(we);el.setDate(el.getDate()-1);
+    document.getElementById('calTitle').textContent=MO[ws.getMonth()].slice(0,3)+' '+ws.getDate()+' - '+MO[el.getMonth()].slice(0,3)+' '+el.getDate()+', '+el.getFullYear();
+    var events=demo(ws,we),grid=document.getElementById('weekGrid');
+    grid.innerHTML='';
+    var today=new Date();today.setHours(0,0,0,0);
+    var corner=document.createElement('div');corner.className='week-col-head';corner.style.cssText='background:var(--black);border-right:1px solid var(--hairline)';grid.appendChild(corner);
+    for(var d=0;d<7;d++){var day=new Date(ws);day.setDate(ws.getDate()+d);var it=day.getTime()===today.getTime();var h=document.createElement('div');h.className='week-col-head'+(it?' is-today':'');h.innerHTML='<span class="dname">'+DA[d]+'</span><span class="dnum">'+day.getDate()+'</span>';grid.appendChild(h);}
+    HR.forEach(function(hour){
+      var tl=document.createElement('div');tl.className='week-time';tl.textContent=hour===12?'12 pm':hour<12?hour+' am':(hour-12)+' pm';grid.appendChild(tl);
+      for(var d=0;d<7;d++){
+        var day=new Date(ws);day.setDate(ws.getDate()+d);
+        var col=document.createElement('div');col.className='week-day-col';
+        var slot=document.createElement('div');slot.className='week-slot';
+        events.filter(function(e){var eD=new Date(e.start);eD.setHours(0,0,0,0);var dD=new Date(day);dD.setHours(0,0,0,0);return eD.getTime()===dD.getTime()&&e.start.getHours()===hour;}).forEach(function(e){var dur=Math.max(1,(e.end-e.start)/3600000);var ev=document.createElement('div');ev.className='week-event';ev.style.height=(dur*60-6)+'px';ev.textContent=e.title;slot.appendChild(ev);});
+        col.appendChild(slot);grid.appendChild(col);
+      }
+    });
+  }
+
+  function calRender(){if(cv==='month')renderMonth();else renderWeek();}
+
+  document.getElementById('calPrev').addEventListener('click',function(){if(cv==='month')cd.setMonth(cd.getMonth()-1);else cd.setDate(cd.getDate()-7);calRender();});
+  document.getElementById('calNext').addEventListener('click',function(){if(cv==='month')cd.setMonth(cd.getMonth()+1);else cd.setDate(cd.getDate()+7);calRender();});
+
+  window.calSwitch=function(view){
+    cv=view;
+    document.getElementById('calMonth').style.display=view==='month'?'block':'none';
+    document.getElementById('calWeek').style.display=view==='week'?'block':'none';
+    document.getElementById('tabMonth').classList.toggle('active',view==='month');
+    document.getElementById('tabWeek').classList.toggle('active',view==='week');
+    calRender();
+  };
+
+  calRender();
+
+  // CHAT
+  var GKEY='YOUR_GEMINI_API_KEY_HERE';
+  var GURL='https://generativelanguage.googleapis.com/v1beta/models/gemini-1.5-flash:generateContent?key='+GKEY;
+  var SYS='You are the booking assistant for Fresh Ground Sound studio in Ventura CA. Phone (805)644-2579. Recording $60/hr, Rehearsal $30/hr min 3hrs, 3hrs=$90 4hrs=$110 5hrs=$130 12hrs=$240. Hours 11am-10pm. 48hr cancellation policy. SSL-XL, Pro Tools, UAD, Neve, API gear. Be warm and concise.';
+  var hist=[];
+  var cw=document.getElementById('chatWidget'),ct2=document.getElementById('chatToggle'),cc=document.getElementById('chatClose'),cm=document.getElementById('chatMessages'),ci2=document.getElementById('chatInput'),cs=document.getElementById('chatSend');
+  ct2.addEventListener('click',function(){cw.classList.toggle('open');if(cw.classList.contains('open')&&hist.length===0)setTimeout(function(){addM('bot',"Hey! Ask me anything about sessions, rates, gear, or availability.");},400);});
+  cc.addEventListener('click',function(){cw.classList.remove('open');});
+  cs.addEventListener('click',sendC);
+  ci2.addEventListener('keydown',function(e){if(e.key==='Enter'&&!e.shiftKey){e.preventDefault();sendC();}});
+  document.querySelectorAll('.chat-chip').forEach(function(chip){chip.addEventListener('click',function(){ci2.value=chip.textContent;sendC();});});
+  function addM(role,text){var d=document.createElement('div');d.className='chat-msg '+role;d.innerHTML='<div class="chat-bubble">'+text+'</div>';cm.appendChild(d);cm.scrollTop=cm.scrollHeight;}
+  async function sendC(){
+    var text=ci2.value.trim();if(!text)return;
+    ci2.value='';addM('user',text);hist.push({role:'user',parts:[{text:text}]});
+    var ty=document.createElement('div');ty.className='chat-msg bot typing';ty.innerHTML='<div class="chat-bubble"><span></span><span></span><span></span></div>';cm.appendChild(ty);cm.scrollTop=cm.scrollHeight;cs.disabled=true;
+    try{
+      var res=await fetch(GURL,{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({system_instruction:{parts:[{text:SYS}]},contents:hist,generationConfig:{temperature:.7,maxOutputTokens:512}})});
+      var data=await res.json();var reply=data.candidates[0].content.parts[0].text;
+      hist.push({role:'model',parts:[{text:reply}]});ty.remove();addM('bot',reply);
+    }catch(err){ty.remove();addM('bot',"Having trouble connecting. Call us at <a href='tel:8056442579'>(805) 644-2579</a>.");}
+    cs.disabled=false;ci2.focus();
+  }
+
+});
+</script>
+</body>
+</html>
