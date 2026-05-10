@@ -219,8 +219,32 @@ footer{background:var(--deep);border-top:1px solid var(--hairline);padding:64px 
 .footer-bottom{display:flex;justify-content:space-between;align-items:center;padding-top:28px;border-top:1px solid var(--hairline);}
 .footer-bottom p{font-family:'DM Mono',monospace;font-size:10px;letter-spacing:.14em;color:var(--muted);}
 
-@media(max-width:900px){nav{padding:18px 24px;}.nav-links{display:none;}.hero-content{padding:0 24px 120px;}.services-strip{grid-template-columns:1fr;}.svc{border-left:1px solid var(--hairline);}#booking{padding:64px 24px;}.ig-grid{grid-template-columns:repeat(3,1fr);}.rates-strip{grid-template-columns:repeat(2,1fr);}.footer-grid{grid-template-columns:1fr;gap:32px;}.footer-bottom{flex-direction:column;gap:10px;text-align:center;}#chatWidget{width:calc(100vw - 32px);right:16px;}}
+/* HAMBURGER */
+.nav-hamburger{display:none;flex-direction:column;justify-content:center;gap:5px;background:none;border:none;padding:6px;cursor:none;z-index:501;position:relative;}
+.nav-hamburger span{display:block;width:22px;height:1px;background:var(--amber);transform-origin:center;transition:transform .35s cubic-bezier(.76,0,.24,1),opacity .25s ease;}
+.nav-hamburger.is-open span:nth-child(1){transform:translateY(6px) rotate(45deg);}
+.nav-hamburger.is-open span:nth-child(2){opacity:0;transform:scaleX(0);}
+.nav-hamburger.is-open span:nth-child(3){transform:translateY(-6px) rotate(-45deg);}
+/* MOBILE NAV */
+.mobile-nav-overlay{position:fixed;inset:0;background:var(--black);z-index:490;display:none;flex-direction:column;justify-content:center;align-items:center;padding:80px 48px 48px;opacity:0;pointer-events:none;transition:opacity .4s ease;}
+.mobile-nav-overlay.is-open{opacity:1;pointer-events:all;}
+.mobile-nav-links{list-style:none;text-align:center;width:100%;}
+.mobile-nav-links li{overflow:hidden;border-bottom:1px solid var(--hairline);}
+.mobile-nav-links li:first-child{border-top:1px solid var(--hairline);}
+.mobile-nav-links li a{font-family:'Bebas Neue',sans-serif;font-size:clamp(38px,9vw,52px);letter-spacing:.06em;color:var(--muted);text-decoration:none;display:block;padding:14px 0;transform:translateY(110%);transition:transform .5s cubic-bezier(.76,0,.24,1),color .3s;}
+.mobile-nav-overlay.is-open .mobile-nav-links li a{transform:translateY(0);}
+.mobile-nav-links li:nth-child(1) a{transition-delay:.06s;}
+.mobile-nav-links li:nth-child(2) a{transition-delay:.11s;}
+.mobile-nav-links li:nth-child(3) a{transition-delay:.16s;}
+.mobile-nav-links li:nth-child(4) a{transition-delay:.21s;}
+.mobile-nav-links li:nth-child(5) a{transition-delay:.26s;}
+.mobile-nav-links li a:hover{color:var(--cream);}
+.mobile-nav-phone-link{font-family:'DM Mono',monospace;font-size:13px;letter-spacing:.2em;color:var(--tape);text-decoration:none;margin-top:36px;opacity:0;transition:opacity .4s ease .32s,color .3s;}
+.mobile-nav-overlay.is-open .mobile-nav-phone-link{opacity:1;}
+.mobile-nav-phone-link:hover{color:var(--amber);}
+@media(max-width:900px){nav{padding:18px 24px;}.nav-links{display:none;}.nav-hamburger{display:flex;}.mobile-nav-overlay{display:flex;}.hero-content{padding:0 24px 120px;}.services-strip{grid-template-columns:1fr;}.svc{border-left:1px solid var(--hairline);}#booking{padding:64px 24px;}.ig-grid{grid-template-columns:repeat(3,1fr);}.rates-strip{grid-template-columns:repeat(2,1fr);}.footer-grid{grid-template-columns:1fr;gap:32px;}.footer-bottom{flex-direction:column;gap:10px;text-align:center;}#chatWidget{width:calc(100vw - 32px);right:16px;}}
 @media(max-width:600px){.ig-grid{grid-template-columns:repeat(2,1fr);}.rates-strip{grid-template-columns:1fr;}.booking-intro{flex-direction:column;}.ig-header{flex-direction:column;align-items:flex-start;gap:12px;}}
+@media(min-width:901px){.nav-hamburger{display:none!important;}.mobile-nav-overlay{display:none!important;}}
 </style>
 </head>
 <body>
@@ -237,16 +261,33 @@ footer{background:var(--deep);border-top:1px solid var(--hairline);padding:64px 
     <li><a href="contact.html">Book a Session</a></li>
   </ul>
   <a href="tel:8056442579" class="nav-phone">(805) 644-2579</a>
+  <button class="nav-hamburger" id="navHamburger" aria-label="Open navigation" aria-expanded="false">
+    <span></span><span></span><span></span>
+  </button>
 </nav>
+
+<div class="mobile-nav-overlay" id="mobileNav" aria-hidden="true">
+  <ul class="mobile-nav-links">
+    <li><a href="index.html" class="active">Home</a></li>
+    <li><a href="artists.html">Artists</a></li>
+    <li><a href="equipment.html">Equipment</a></li>
+    <li><a href="about.html">About</a></li>
+    <li><a href="contact.html">Book a Session</a></li>
+  </ul>
+  <a href="tel:8056442579" class="mobile-nav-phone-link">(805) 644-2579</a>
+</div>
 
 <section id="hero">
   <div class="carousel">
     <div class="carousel-track" id="carTrack">
-      <div class="carousel-slide active"><img src="https://images.unsplash.com/photo-1598488035139-bdbb2231ce04?w=1600&q=80" alt="Recording studio console"></div>
-      <div class="carousel-slide"><img src="https://images.unsplash.com/photo-1520523839897-bd0b52f945a0?w=1600&q=80" alt="Studio microphone"></div>
-      <div class="carousel-slide"><img src="https://images.unsplash.com/photo-1571330735066-03aaa9429d89?w=1600&q=80" alt="Outboard gear rack"></div>
-      <div class="carousel-slide"><img src="https://images.unsplash.com/photo-1459233313842-cd392ee2c388?w=1600&q=80" alt="Rehearsal room drums"></div>
-      <div class="carousel-slide"><img src="https://images.unsplash.com/photo-1507838153414-b4b713384a76?w=1600&q=80" alt="Piano room"></div>
+      <div class="carousel-slide active"><img src="photos/carousel-1-console.jpg" alt="Engineer at the console"></div>
+      <div class="carousel-slide"><img src="photos/carousel-2-ssl.jpg" alt="SSL XL-Desk recording console"></div>
+      <div class="carousel-slide"><img src="photos/carousel-3-session.jpg" alt="Recording session, engineer and vocalist"></div>
+      <div class="carousel-slide"><img src="photos/carousel-4-engineer.jpg" alt="Engineer at console with vocalist on screen"></div>
+      <div class="carousel-slide"><img src="photos/carousel-5-drums.jpg" alt="Drum tracking session"></div>
+      <div class="carousel-slide"><img src="photos/carousel-6-liveroom.jpg" alt="Live room setup"></div>
+      <div class="carousel-slide"><img src="photos/carousel-7-lounge.jpg" alt="Studio lounge and tracking room"></div>
+      <div class="carousel-slide"><img src="photos/carousel-8-vu.jpg" alt="Chandler Limited VU meters"></div>
     </div>
     <div class="car-overlay"></div>
   </div>
@@ -350,12 +391,20 @@ footer{background:var(--deep);border-top:1px solid var(--hairline);padding:64px 
     <span class="ig-handle">@freshgroundsound</span>
   </div>
   <div class="ig-grid reveal" style="transition-delay:.1s">
-    <div class="ig-post"><img src="https://images.unsplash.com/photo-1598488035139-bdbb2231ce04?w=400&q=80" alt="Studio session"><div class="ig-overlay"><span>View Post</span></div></div>
-    <div class="ig-post"><img src="https://images.unsplash.com/photo-1520523839897-bd0b52f945a0?w=400&q=80" alt="Vocal booth"><div class="ig-overlay"><span>View Post</span></div></div>
-    <div class="ig-post"><img src="https://images.unsplash.com/photo-1571330735066-03aaa9429d89?w=400&q=80" alt="Tracking day"><div class="ig-overlay"><span>View Post</span></div></div>
-    <div class="ig-post"><img src="https://images.unsplash.com/photo-1459233313842-cd392ee2c388?w=400&q=80" alt="Rehearsal room"><div class="ig-overlay"><span>View Post</span></div></div>
-    <div class="ig-post"><img src="https://images.unsplash.com/photo-1493225457124-a3eb161ffa5f?w=400&q=80" alt="Band lockout"><div class="ig-overlay"><span>View Post</span></div></div>
-    <div class="ig-post"><img src="https://images.unsplash.com/photo-1507838153414-b4b713384a76?w=400&q=80" alt="Piano room"><div class="ig-overlay"><span>View Post</span></div></div>
+    <div class="ig-post"><img src="photos/ig-1-vocalist.jpg" alt="Vocal session"><div class="ig-overlay"><span>View Post</span></div></div>
+    <div class="ig-post"><img src="photos/ig-2-drums.jpg" alt="Drum kit"><div class="ig-overlay"><span>View Post</span></div></div>
+    <div class="ig-post"><img src="photos/ig-3-console.jpg" alt="SSL console"><div class="ig-overlay"><span>View Post</span></div></div>
+    <div class="ig-post"><img src="photos/ig-4-guitar.jpg" alt="Guitar tracking"><div class="ig-overlay"><span>View Post</span></div></div>
+    <div class="ig-post"><img src="photos/ig-5-ua.jpg" alt="Universal Audio 6176"><div class="ig-overlay"><span>View Post</span></div></div>
+    <div class="ig-post"><img src="photos/ig-6-session.jpg" alt="Recording session"><div class="ig-overlay"><span>View Post</span></div></div>
+  </div>
+  <div class="ig-grid reveal" style="transition-delay:.2s">
+    <div class="ig-post"><img src="photos/ig2-1-band.jpg" alt="Full band rehearsal"><div class="ig-overlay"><span>View Post</span></div></div>
+    <div class="ig-post"><img src="photos/ig2-2-distressor.jpg" alt="Distressor compressors"><div class="ig-overlay"><span>View Post</span></div></div>
+    <div class="ig-post"><img src="photos/ig2-3-rehearsal.jpg" alt="Rehearsal room"><div class="ig-overlay"><span>View Post</span></div></div>
+    <div class="ig-post"><img src="photos/ig2-4-rack.jpg" alt="Outboard rack gear"><div class="ig-overlay"><span>View Post</span></div></div>
+    <div class="ig-post"><img src="photos/ig2-5-piano.jpg" alt="Piano room session"><div class="ig-overlay"><span>View Post</span></div></div>
+    <div class="ig-post"><img src="photos/ig2-couch.jpg" alt="Writers on the couch"><div class="ig-overlay"><span>View Post</span></div></div>
   </div>
   <div class="ig-follow reveal" style="transition-delay:.2s">
     <a href="https://instagram.com/freshgroundsound" target="_blank" rel="noopener">Follow @freshgroundsound</a>
@@ -511,6 +560,15 @@ document.addEventListener('DOMContentLoaded', function() {
   };
 
   calRender();
+
+  // MOBILE NAV
+  var hamburgerBtn=document.getElementById('navHamburger');
+  var mobileNavEl=document.getElementById('mobileNav');
+  function openMobileNav(){mobileNavEl.classList.add('is-open');hamburgerBtn.classList.add('is-open');hamburgerBtn.setAttribute('aria-expanded','true');mobileNavEl.setAttribute('aria-hidden','false');document.body.style.overflow='hidden';}
+  function closeMobileNav(){mobileNavEl.classList.remove('is-open');hamburgerBtn.classList.remove('is-open');hamburgerBtn.setAttribute('aria-expanded','false');mobileNavEl.setAttribute('aria-hidden','true');document.body.style.overflow='';}
+  hamburgerBtn.addEventListener('click',function(){mobileNavEl.classList.contains('is-open')?closeMobileNav():openMobileNav();});
+  document.addEventListener('keydown',function(e){if(e.key==='Escape'&&mobileNavEl.classList.contains('is-open'))closeMobileNav();});
+  mobileNavEl.querySelectorAll('a').forEach(function(a){a.addEventListener('click',closeMobileNav);});
 
   // CHAT
   var GKEY='YOUR_GEMINI_API_KEY_HERE';
