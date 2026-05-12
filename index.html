@@ -42,9 +42,9 @@ nav.scrolled{border-bottom-color:var(--hairline);background:rgba(10,9,8,.97);}
 .carousel{position:absolute;inset:0;}
 .carousel-track{display:flex;height:100%;transition:transform .9s cubic-bezier(.77,0,.18,1);}
 .carousel-slide{min-width:100%;height:100%;position:relative;overflow:hidden;}
-.carousel-slide img{width:100%;height:100%;object-fit:cover;transform:scale(1.05);transition:transform 6s ease;filter:brightness(.45);}
+.carousel-slide img{width:100%;height:100%;object-fit:cover;transform:scale(1.05);transition:transform 6s ease;filter:brightness(.72);}
 .carousel-slide.active img{transform:scale(1);}
-.car-overlay{position:absolute;inset:0;background:linear-gradient(to top,rgba(10,9,8,.95) 0%,rgba(10,9,8,.25) 50%,rgba(10,9,8,.45) 100%),linear-gradient(to right,rgba(10,9,8,.55) 0%,transparent 60%);}
+.car-overlay{position:absolute;inset:0;background:linear-gradient(to top,rgba(10,9,8,.65) 0%,rgba(10,9,8,.15) 50%,rgba(10,9,8,.25) 100%),linear-gradient(to right,rgba(10,9,8,.35) 0%,transparent 60%);}
 .car-dots{position:absolute;bottom:48px;right:48px;display:flex;gap:8px;z-index:10;}
 .car-dot{width:24px;height:2px;background:rgba(240,230,211,.2);border:none;cursor:none;transition:background .3s,width .3s;}
 .car-dot.active{background:var(--amber);width:40px;}
@@ -163,6 +163,11 @@ nav.scrolled{border-bottom-color:var(--hairline);background:rgba(10,9,8,.97);}
 .ig-follow a{font-family:'DM Mono',monospace;font-size:11px;letter-spacing:.25em;text-transform:uppercase;color:var(--cream);border:1px solid var(--hairline);padding:14px 40px;text-decoration:none;display:inline-flex;align-items:center;gap:12px;transition:border-color .3s,color .3s;}
 .ig-follow a:hover{border-color:var(--amber);color:var(--amber);}
 
+/* MAP SECTION */
+.map-section{padding:0 48px 80px;}
+.map-wrap{border:1px solid var(--hairline);overflow:hidden;}
+.map-wrap iframe{width:100%;height:380px;border:none;filter:invert(1) hue-rotate(180deg) brightness(0.85) saturate(0.6);}
+
 /* CHAT */
 .chat-fab{position:fixed;bottom:32px;right:32px;z-index:800;display:flex;flex-direction:column;align-items:flex-end;gap:10px;}
 .chat-fab-label{font-family:'DM Mono',monospace;font-size:9px;letter-spacing:.25em;color:var(--muted);background:rgba(10,9,8,.85);padding:4px 10px;border:1px solid var(--hairline);}
@@ -243,7 +248,7 @@ footer{background:var(--deep);border-top:1px solid var(--hairline);padding:64px 
 .mobile-nav-overlay.is-open .mobile-nav-phone-link{opacity:1;}
 .mobile-nav-phone-link:hover{color:var(--amber);}
 @media(max-width:900px){nav{padding:18px 24px;}.nav-links{display:none;}.nav-hamburger{display:flex;}.mobile-nav-overlay{display:flex;}.hero-content{padding:0 24px 120px;}.services-strip{grid-template-columns:1fr;}.svc{border-left:1px solid var(--hairline);}#booking{padding:64px 24px;}.ig-grid{grid-template-columns:repeat(3,1fr);}.rates-strip{grid-template-columns:repeat(2,1fr);}.footer-grid{grid-template-columns:1fr;gap:32px;}.footer-bottom{flex-direction:column;gap:10px;text-align:center;}#chatWidget{width:calc(100vw - 32px);right:16px;}}
-@media(max-width:600px){.ig-grid{grid-template-columns:repeat(2,1fr);}.rates-strip{grid-template-columns:1fr;}.booking-intro{flex-direction:column;}.ig-header{flex-direction:column;align-items:flex-start;gap:12px;}}
+@media(max-width:600px){.ig-grid{grid-template-columns:repeat(2,1fr);}.rates-strip{grid-template-columns:1fr;}.booking-intro{flex-direction:column;}.ig-header{flex-direction:column;align-items:flex-start;gap:12px;}.map-section{padding:0 24px 60px;}}
 @media(min-width:901px){.nav-hamburger{display:none!important;}.mobile-nav-overlay{display:none!important;}}
 </style>
 </head>
@@ -256,6 +261,7 @@ footer{background:var(--deep);border-top:1px solid var(--hairline);padding:64px 
   <ul class="nav-links">
     <li><a href="index.html">Home</a></li>
     <li><a href="artists.html">Artists</a></li>
+    <li><a href="gallery.html">Gallery</a></li>
     <li><a href="equipment.html">Equipment</a></li>
     <li><a href="about.html">About</a></li>
     <li><a href="contact.html">Book a Session</a></li>
@@ -288,6 +294,7 @@ footer{background:var(--deep);border-top:1px solid var(--hairline);padding:64px 
       <div class="carousel-slide"><img src="photos/carousel-6-liveroom.jpg" alt="Live room setup"></div>
       <div class="carousel-slide"><img src="photos/carousel-7-lounge.jpg" alt="Studio lounge and tracking room"></div>
       <div class="carousel-slide"><img src="photos/carousel-8-vu.jpg" alt="Chandler Limited VU meters"></div>
+      <div class="carousel-slide"><img src="photos/carousel-9-wideshot.png" alt="Studio wide shot"></div>
     </div>
     <div class="car-overlay"></div>
   </div>
@@ -410,6 +417,24 @@ footer{background:var(--deep);border-top:1px solid var(--hairline);padding:64px 
     <a href="https://instagram.com/freshgroundsound" target="_blank" rel="noopener">Follow @freshgroundsound</a>
   </div>
 </section>
+
+<!-- Map -->
+<div class="map-section">
+  <div class="section-label reveal">Find Us</div>
+  <h2 class="ig-title reveal" style="margin-bottom:32px">3740 Transport St<br><span class="accent">Ventura, CA</span></h2>
+  <div class="map-wrap reveal" style="transition-delay:.1s">
+    <iframe
+      src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3293.9!2d-119.228!3d34.242!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x0!2s3740+Transport+St%2C+Ventura%2C+CA+93003!5e0!3m2!1sen!2sus!4v1"
+      allowfullscreen=""
+      loading="lazy"
+      referrerpolicy="no-referrer-when-downgrade"
+      title="Fresh Ground Sound Location">
+    </iframe>
+  </div>
+  <p style="font-family:'DM Mono',monospace;font-size:10px;letter-spacing:.15em;color:var(--muted);margin-top:12px">
+    3740 Transport Street &middot; Ventura, California 93003 &middot; <a href="https://maps.google.com/?q=3740+Transport+St+Ventura+CA+93003" target="_blank" rel="noopener" style="color:var(--tape);text-decoration:none;">Open in Google Maps →</a>
+  </p>
+</div>
 
 <footer>
   <div class="footer-grid">

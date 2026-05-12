@@ -6,6 +6,11 @@
 <title>Equipment & Rates — Fresh Ground Sound</title>
 <link rel="stylesheet" href="assets/style.css">
 <style>
+/* Page header override — dark photo background */
+.page-header{height:50vh;position:relative;display:flex;align-items:flex-end;padding:0 48px 80px;background:var(--deep);overflow:hidden;}
+.page-header::before{content:'';position:absolute;inset:0;background:linear-gradient(to top,rgba(10,9,8,.95) 0%,rgba(10,9,8,.4) 100%);z-index:1;}
+.page-header-bg{position:absolute;inset:0;background:url('photos/carousel-1-console.jpg') center/cover no-repeat;filter:brightness(.35);}
+.page-header h1,.page-header .page-header-label{position:relative;z-index:2;}
 .gear-section { padding: 0 48px 80px; }
 .gear-section h3 {
   font-family: 'Bebas Neue', sans-serif;
@@ -144,6 +149,7 @@
   filter: invert(1) hue-rotate(180deg) brightness(0.85) saturate(0.7);
 }
 @media(max-width:768px){
+  .page-header{padding:0 24px 60px;height:40vh;}
   .rates-grid { grid-template-columns: 1fr; padding: 0 24px 60px; }
   .gear-section { padding: 0 24px 60px; }
   .dims-grid { grid-template-columns: repeat(2,1fr); }
@@ -161,6 +167,7 @@
   <ul class="nav-links">
     <li><a href="index.html">Home</a></li>
     <li><a href="artists.html">Artists</a></li>
+    <li><a href="gallery.html">Gallery</a></li>
     <li><a href="equipment.html">Equipment</a></li>
     <li><a href="about.html">About</a></li>
     <li><a href="contact.html">Book a Session</a></li>
@@ -169,8 +176,11 @@
 </nav>
 
 <div class="page-header">
+  <div class="page-header-bg"></div>
+  <div>
   <div class="page-header-label">The Arsenal</div>
   <h1>Gear &<br><span class="accent">Rates</span></h1>
+  </div>
 </div>
 
 <!-- Rates -->
@@ -243,14 +253,10 @@
   <div class="gear-list reveal">
     <div class="gear-item">Neve 1272 (× 4)</div>
     <div class="gear-item">API 512 (× 2)</div>
-    <div class="gear-item">Neve 33609J</div>
     <div class="gear-item">UA 6176 Pre/Comp</div>
     <div class="gear-item">Focusrite ISA2 Pre (× 2)</div>
-    <div class="gear-item">Quad 8 EQ 310/333C (× 2)</div>
     <div class="gear-item">Distressor EL8-X (× 2)</div>
-    <div class="gear-item">Quad 333P EQ (× 2)</div>
     <div class="gear-item">Helios Type 69 (× 2)</div>
-    <div class="gear-item">DBX 160</div>
     <div class="gear-item">API 527</div>
     <div class="gear-item">Retro Sta-Level</div>
     <div class="gear-item">MAAG EQ4 (× 2)</div>
@@ -283,7 +289,6 @@
   <h3 class="reveal">Amplifiers</h3>
   <div class="gear-list reveal">
     <div class="gear-item">Fender Blues Deluxe</div>
-    <div class="gear-item">Marshall MkII Lead</div>
     <div class="gear-item">Fender Champ</div>
     <div class="gear-item">Albion GS12</div>
     <div class="gear-item">Magnavox</div>

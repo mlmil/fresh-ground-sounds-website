@@ -6,6 +6,11 @@
 <title>Artists — Fresh Ground Sound</title>
 <link rel="stylesheet" href="assets/style.css">
 <style>
+/* Page header override — dark photo background */
+.page-header{height:50vh;position:relative;display:flex;align-items:flex-end;padding:0 48px 80px;background:var(--deep);overflow:hidden;}
+.page-header::before{content:'';position:absolute;inset:0;background:linear-gradient(to top,rgba(10,9,8,.95) 0%,rgba(10,9,8,.4) 100%);z-index:1;}
+.page-header-bg{position:absolute;inset:0;background:url('photos/ig-1-vocalist.jpg') center/cover no-repeat;filter:brightness(.35);transform:scaleX(-1);}
+.page-header h1,.page-header .page-header-label,.page-header .intro-text{position:relative;z-index:2;}
 .artists-grid {
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
@@ -56,6 +61,9 @@
   font-style: italic;
   margin-top: 24px;
 }
+@media(max-width:768px){
+  .page-header{padding:0 24px 60px;height:40vh;}
+}
 </style>
 </head>
 <body>
@@ -67,6 +75,7 @@
   <ul class="nav-links">
     <li><a href="index.html">Home</a></li>
     <li><a href="artists.html">Artists</a></li>
+    <li><a href="gallery.html">Gallery</a></li>
     <li><a href="equipment.html">Equipment</a></li>
     <li><a href="about.html">About</a></li>
     <li><a href="contact.html">Book a Session</a></li>
@@ -75,9 +84,12 @@
 </nav>
 
 <div class="page-header">
+  <div class="page-header-bg"></div>
+  <div>
   <div class="page-header-label">Our Clients</div>
   <h1>Artists &<br><span class="accent">Recordings</span></h1>
   <p class="intro-text">From Grammy-winning artists to Ventura's finest local acts — Fresh Ground Sound has been the room where it happens.</p>
+  </div>
 </div>
 
 <section class="section">

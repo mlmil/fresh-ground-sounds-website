@@ -1,0 +1,209 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Gallery — Fresh Ground Sound</title>
+<meta name="description" content="Photo gallery of Fresh Ground Sound recording studio in Ventura, CA.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Lora:ital,wght@0,400;0,500;1,400&family=DM+Mono:wght@300;400&display=swap" rel="stylesheet">
+<style>
+:root{--black:#0a0908;--deep:#111010;--warm-dark:#1a1714;--tape:#c17f3b;--amber:#e8a84c;--cream:#f0e6d3;--muted:#8a7d6e;--hairline:rgba(193,127,59,0.2);--glow:rgba(232,168,76,0.07);}
+*,*::before,*::after{margin:0;padding:0;box-sizing:border-box;}
+html{scroll-behavior:smooth;}
+body{background:var(--black);color:var(--cream);font-family:'Lora',serif;overflow-x:hidden;cursor:none;}
+.cursor{width:8px;height:8px;background:var(--amber);border-radius:50%;position:fixed;pointer-events:none;z-index:9999;transform:translate(-50%,-50%);mix-blend-mode:difference;}
+.cursor-ring{width:32px;height:32px;border:1px solid var(--tape);border-radius:50%;position:fixed;pointer-events:none;z-index:9998;transform:translate(-50%,-50%);opacity:.6;}
+.reveal{opacity:0;transform:translateY(28px);transition:opacity .7s ease,transform .7s ease;}
+.reveal.visible{opacity:1;transform:translateY(0);}
+.btn-primary{font-family:'DM Mono',monospace;font-size:11px;letter-spacing:.25em;text-transform:uppercase;color:var(--black);background:var(--amber);padding:14px 32px;text-decoration:none;display:inline-block;border:none;cursor:none;transition:background .3s,transform .2s;}
+.btn-primary:hover{background:var(--cream);transform:translateY(-2px);}
+.section-label{font-family:'DM Mono',monospace;font-size:10px;letter-spacing:.4em;color:var(--tape);text-transform:uppercase;margin-bottom:16px;display:flex;align-items:center;gap:16px;}
+.section-label::before{content:'';display:block;width:32px;height:1px;background:var(--tape);}
+
+/* NAV */
+nav{position:fixed;top:0;left:0;right:0;z-index:500;padding:22px 48px;display:flex;justify-content:space-between;align-items:center;background:linear-gradient(to bottom,rgba(10,9,8,.97),transparent);backdrop-filter:blur(4px);border-bottom:1px solid transparent;transition:border-color .3s,background .3s;}
+nav.scrolled{border-bottom-color:var(--hairline);background:rgba(10,9,8,.97);}
+.nav-logo{font-family:'Bebas Neue',sans-serif;font-size:20px;letter-spacing:.15em;color:var(--amber);text-decoration:none;display:flex;flex-direction:column;line-height:1;}
+.nav-logo span{font-family:'DM Mono',monospace;font-size:8px;letter-spacing:.35em;color:var(--muted);font-weight:300;margin-top:4px;}
+.nav-links{display:flex;gap:36px;list-style:none;}
+.nav-links a{font-family:'DM Mono',monospace;font-size:10px;letter-spacing:.25em;color:var(--muted);text-decoration:none;text-transform:uppercase;transition:color .3s;position:relative;}
+.nav-links a::after{content:'';position:absolute;bottom:-4px;left:0;right:0;height:1px;background:var(--amber);transform:scaleX(0);transition:transform .3s;transform-origin:left;}
+.nav-links a:hover{color:var(--cream);}
+.nav-links a:hover::after{transform:scaleX(1);}
+.nav-phone{font-family:'DM Mono',monospace;font-size:11px;letter-spacing:.1em;color:var(--tape);text-decoration:none;transition:color .3s;}
+.nav-phone:hover{color:var(--amber);}
+
+/* PAGE HEADER */
+.page-header{height:50vh;position:relative;display:flex;align-items:flex-end;padding:0 48px 80px;background:var(--deep);overflow:hidden;}
+.page-header::before{content:'';position:absolute;inset:0;background:linear-gradient(to top,rgba(10,9,8,.95) 0%,rgba(10,9,8,.4) 100%);z-index:1;}
+.page-header-bg{position:absolute;inset:0;background:url('photos/carousel-3-session.jpg') center/cover no-repeat;filter:brightness(.35);}
+.page-header-label{position:relative;z-index:2;font-family:'DM Mono',monospace;font-size:10px;letter-spacing:.4em;color:var(--tape);text-transform:uppercase;margin-bottom:16px;display:flex;align-items:center;gap:16px;}
+.page-header-label::before{content:'';display:block;width:40px;height:1px;background:var(--tape);}
+.page-header h1{position:relative;z-index:2;font-family:'Bebas Neue',sans-serif;font-size:clamp(48px,7vw,96px);line-height:.9;letter-spacing:.02em;color:var(--cream);}
+.page-header h1 .accent{color:var(--amber);}
+
+/* GALLERY */
+.gallery-section{padding:80px 48px;}
+.gallery-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(280px,1fr));gap:12px;}
+.gallery-item{position:relative;overflow:hidden;aspect-ratio:4/3;background:var(--warm-dark);cursor:none;}
+.gallery-item img{width:100%;height:100%;object-fit:cover;transition:transform .6s ease,filter .6s ease;filter:brightness(.85);}
+.gallery-item:hover img{transform:scale(1.06);filter:brightness(1);}
+.gallery-item::after{content:'';position:absolute;inset:0;border:1px solid var(--hairline);pointer-events:none;transition:border-color .3s;}
+.gallery-item:hover::after{border-color:var(--tape);}
+
+/* LIGHTBOX */
+.lightbox{position:fixed;inset:0;z-index:1000;background:rgba(10,9,8,.95);display:none;align-items:center;justify-content:center;backdrop-filter:blur(8px);}
+.lightbox.active{display:flex;}
+.lightbox img{max-width:90vw;max-height:85vh;object-fit:contain;border:1px solid var(--hairline);}
+.lightbox-close{position:absolute;top:24px;right:32px;font-family:'DM Mono',monospace;font-size:14px;color:var(--muted);background:none;border:none;cursor:none;transition:color .3s;}
+.lightbox-close:hover{color:var(--cream);}
+.lightbox-prev,.lightbox-next{position:absolute;top:50%;transform:translateY(-50%);width:48px;height:48px;border:1px solid var(--hairline);background:rgba(10,9,8,.7);color:var(--muted);font-size:18px;cursor:none;display:flex;align-items:center;justify-content:center;transition:border-color .3s,color .3s;}
+.lightbox-prev:hover,.lightbox-next:hover{border-color:var(--amber);color:var(--amber);}
+.lightbox-prev{left:24px;}
+.lightbox-next{right:24px;}
+
+/* FOOTER */
+footer{padding:80px 48px 0;border-top:1px solid var(--hairline);}
+.footer-grid{display:grid;grid-template-columns:2fr 1fr 1fr 1.5fr;gap:48px;margin-bottom:64px;}
+.footer-brand .logo{font-family:'Bebas Neue',sans-serif;font-size:24px;letter-spacing:.1em;color:var(--amber);margin-bottom:8px;}
+.footer-brand .tagline{font-family:'DM Mono',monospace;font-size:9px;letter-spacing:.3em;color:var(--muted);text-transform:uppercase;margin-bottom:16px;}
+.footer-brand p{font-size:13px;color:var(--muted);line-height:1.7;max-width:280px;}
+.footer-col h4{font-family:'Bebas Neue',sans-serif;font-size:16px;letter-spacing:.15em;color:var(--cream);margin-bottom:20px;}
+.footer-col ul{list-style:none;}
+.footer-col ul li{margin-bottom:10px;}
+.footer-col ul li a{font-family:'DM Mono',monospace;font-size:10px;letter-spacing:.15em;color:var(--muted);text-decoration:none;text-transform:uppercase;transition:color .3s;}
+.footer-col ul li a:hover{color:var(--amber);}
+.footer-col p{font-size:13px;color:var(--muted);line-height:1.8;}
+.footer-col p a{color:var(--tape);text-decoration:none;transition:color .3s;}
+.footer-col p a:hover{color:var(--amber);}
+.footer-bottom{display:flex;justify-content:space-between;padding:24px 0;border-top:1px solid var(--hairline);font-family:'DM Mono',monospace;font-size:9px;letter-spacing:.2em;color:var(--muted);text-transform:uppercase;}
+
+@media(max-width:768px){
+  nav{padding:18px 24px;}
+  .nav-links{display:none;}
+  .page-header{padding:0 24px 60px;height:40vh;}
+  .gallery-section{padding:60px 24px;}
+  .gallery-grid{grid-template-columns:repeat(auto-fill,minmax(140px,1fr));gap:8px;}
+  .footer-grid{grid-template-columns:1fr;gap:32px;}
+  .footer-bottom{flex-direction:column;gap:8px;}
+}
+</style>
+</head>
+<body>
+<div class="cursor"></div>
+<div class="cursor-ring"></div>
+
+<nav>
+  <a href="index.html" class="nav-logo">Fresh Ground Sound<span>Ventura, California</span></a>
+  <ul class="nav-links">
+    <li><a href="index.html">Home</a></li>
+    <li><a href="artists.html">Artists</a></li>
+    <li><a href="gallery.html">Gallery</a></li>
+    <li><a href="equipment.html">Equipment</a></li>
+    <li><a href="about.html">About</a></li>
+    <li><a href="contact.html">Book a Session</a></li>
+  </ul>
+  <a href="tel:8056442579" class="nav-phone">(805) 644-2579</a>
+</nav>
+
+<div class="page-header">
+  <div class="page-header-bg"></div>
+  <div>
+    <div class="page-header-label">The Studio in Frames</div>
+    <h1>Photo<br><span class="accent">Gallery</span></h1>
+  </div>
+</div>
+
+<div class="gallery-section">
+  <div class="section-label reveal">Studio Life</div>
+  <div class="gallery-grid reveal">
+    <div class="gallery-item"><img src="photos/carousel-1-band.jpg" alt="Band recording session" loading="lazy"></div>
+    <div class="gallery-item"><img src="photos/carousel-1-console.jpg" alt="Console overview" loading="lazy"></div>
+    <div class="gallery-item"><img src="photos/carousel-2-ssl.jpg" alt="SSL console" loading="lazy"></div>
+    <div class="gallery-item"><img src="photos/carousel-3-session.jpg" alt="Studio session" loading="lazy"></div>
+    <div class="gallery-item"><img src="photos/carousel-4-drums.jpg" alt="Drum tracking" loading="lazy"></div>
+    <div class="gallery-item"><img src="photos/carousel-4-engineer.jpg" alt="Engineer mixing" loading="lazy"></div>
+    <div class="gallery-item"><img src="photos/carousel-5-drums.jpg" alt="Drums in live room" loading="lazy"></div>
+    <div class="gallery-item"><img src="photos/carousel-5-rehearsal.jpg" alt="Rehearsal room" loading="lazy"></div>
+    <div class="gallery-item"><img src="photos/carousel-6-liveroom.jpg" alt="Live room" loading="lazy"></div>
+    <div class="gallery-item"><img src="photos/carousel-7-lounge.jpg" alt="Studio lounge" loading="lazy"></div>
+    <div class="gallery-item"><img src="photos/carousel-7-writing.jpg" alt="Writing session" loading="lazy"></div>
+    <div class="gallery-item"><img src="photos/carousel-8-vu.jpg" alt="VU meters" loading="lazy"></div>
+    <div class="gallery-item"><img src="photos/ig-1-vocalist.jpg" alt="Vocalist tracking" loading="lazy"></div>
+    <div class="gallery-item"><img src="photos/ig-2-drums.jpg" alt="Drum setup" loading="lazy"></div>
+    <div class="gallery-item"><img src="photos/ig-3-console.jpg" alt="Console close-up" loading="lazy"></div>
+    <div class="gallery-item"><img src="photos/ig-4-guitar.jpg" alt="Guitar recording" loading="lazy"></div>
+    <div class="gallery-item"><img src="photos/ig-5-ua.jpg" alt="Universal Audio gear" loading="lazy"></div>
+    <div class="gallery-item"><img src="photos/ig-6-session.jpg" alt="Session in progress" loading="lazy"></div>
+    <div class="gallery-item"><img src="photos/ig2-1-band.jpg" alt="Full band" loading="lazy"></div>
+    <div class="gallery-item"><img src="photos/ig2-1-vocalist-male.jpg" alt="Male vocalist" loading="lazy"></div>
+    <div class="gallery-item"><img src="photos/ig2-2-distressor.jpg" alt="Distressor compressor" loading="lazy"></div>
+    <div class="gallery-item"><img src="photos/ig2-3-rehearsal.jpg" alt="Rehearsal" loading="lazy"></div>
+    <div class="gallery-item"><img src="photos/ig2-4-rack.jpg" alt="Outboard rack" loading="lazy"></div>
+    <div class="gallery-item"><img src="photos/ig2-5-piano.jpg" alt="Piano room" loading="lazy"></div>
+    <div class="gallery-item"><img src="photos/ig2-6-guitar.jpg" alt="Guitar amp" loading="lazy"></div>
+    <div class="gallery-item"><img src="photos/ig2-couch.jpg" alt="Studio lounge area" loading="lazy"></div>
+  </div>
+</div>
+
+<!-- Lightbox -->
+<div class="lightbox" id="lightbox">
+  <button class="lightbox-close" onclick="closeLightbox()">CLOSE [ESC]</button>
+  <button class="lightbox-prev" onclick="changeImage(-1)">&#8249;</button>
+  <img src="" alt="Gallery image" id="lightbox-img">
+  <button class="lightbox-next" onclick="changeImage(1)">&#8250;</button>
+</div>
+
+<footer>
+  <div class="footer-grid">
+    <div class="footer-brand"><div class="logo">Fresh Ground Sound</div><div class="tagline">Ventura, California · Est. 1983</div><p>Professional recording, rehearsal, and live sound production on the coast of Southern California.</p></div>
+    <div class="footer-col"><h4>Navigate</h4><ul><li><a href="index.html">Home</a></li><li><a href="artists.html">Artists</a></li><li><a href="gallery.html">Gallery</a></li><li><a href="equipment.html">Equipment</a></li><li><a href="about.html">About</a></li><li><a href="contact.html">Book</a></li></ul></div>
+    <div class="footer-col"><h4>Services</h4><ul><li><a href="equipment.html#recording">Recording — $60/hr</a></li><li><a href="equipment.html#rehearsal">Rehearsal — $30/hr</a></li><li><a href="contact.html">Live Sound</a></li></ul></div>
+    <div class="footer-col"><h4>Contact</h4><p>3740 Transport Street<br>Ventura, CA 93003<br><br><a href="tel:8056442579">(805) 644-2579</a><br><a href="mailto:Freshgroundsound@gmail.com">Freshgroundsound@gmail.com</a></p></div>
+  </div>
+  <div class="footer-bottom"><p>© 2025 Fresh Ground Records</p><p>3740 Transport Street · Ventura, CA 93003</p></div>
+</footer>
+
+<script src="assets/nav.js"></script>
+<script>
+/* Reveal on scroll */
+const reveals=document.querySelectorAll('.reveal');
+const observer=new IntersectionObserver((entries)=>{entries.forEach(e=>{if(e.isIntersecting){e.target.classList.add('visible');}});},{threshold:.1});
+reveals.forEach(r=>observer.observe(r));
+
+/* Lightbox */
+const items=document.querySelectorAll('.gallery-item img');
+const lightbox=document.getElementById('lightbox');
+const lightboxImg=document.getElementById('lightbox-img');
+let currentIndex=0;
+
+items.forEach((img,i)=>{
+  img.parentElement.addEventListener('click',()=>{openLightbox(i);});
+});
+
+function openLightbox(index){
+  currentIndex=index;
+  lightboxImg.src=items[currentIndex].src;
+  lightbox.classList.add('active');
+  document.body.style.overflow='hidden';
+}
+function closeLightbox(){
+  lightbox.classList.remove('active');
+  document.body.style.overflow='';
+}
+function changeImage(dir){
+  currentIndex=(currentIndex+dir+items.length)%items.length;
+  lightboxImg.src=items[currentIndex].src;
+}
+
+lightbox.addEventListener('click',(e)=>{if(e.target===lightbox)closeLightbox();});
+document.addEventListener('keydown',(e)=>{
+  if(!lightbox.classList.contains('active'))return;
+  if(e.key==='Escape')closeLightbox();
+  if(e.key==='ArrowLeft')changeImage(-1);
+  if(e.key==='ArrowRight')changeImage(1);
+});
+</script>
+</body>
+</html>
