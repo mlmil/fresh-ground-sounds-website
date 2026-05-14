@@ -25,16 +25,16 @@ body{background:var(--black);color:var(--cream);font-family:'Lora',serif;overflo
 .section-label::before{content:'';display:block;width:32px;height:1px;background:var(--tape);}
 
 /* NAV */
-nav{position:fixed;top:0;left:0;right:0;z-index:500;padding:22px 48px;display:flex;justify-content:space-between;align-items:center;background:linear-gradient(to bottom,rgba(10,9,8,.97),transparent);backdrop-filter:blur(4px);border-bottom:1px solid transparent;transition:border-color .3s,background .3s;}
+nav{position:fixed;top:0;left:0;right:0;z-index:500;padding:30px 56px;display:flex;justify-content:space-between;align-items:center;background:linear-gradient(to bottom,rgba(10,9,8,.97),transparent);backdrop-filter:blur(4px);border-bottom:1px solid transparent;transition:border-color .3s,background .3s;}
 nav.scrolled{border-bottom-color:var(--hairline);background:rgba(10,9,8,.97);}
-.nav-logo{font-family:'Bebas Neue',sans-serif;font-size:20px;letter-spacing:.15em;color:var(--amber);text-decoration:none;display:flex;flex-direction:column;line-height:1;}
-.nav-logo span{font-family:'DM Mono',monospace;font-size:8px;letter-spacing:.35em;color:var(--muted);font-weight:300;margin-top:4px;}
-.nav-links{display:flex;gap:36px;list-style:none;}
-.nav-links a{font-family:'DM Mono',monospace;font-size:10px;letter-spacing:.25em;color:var(--muted);text-decoration:none;text-transform:uppercase;transition:color .3s;position:relative;}
+.nav-logo{font-family:'Bebas Neue',sans-serif;font-size:26px;letter-spacing:.15em;color:var(--amber);text-decoration:none;display:flex;flex-direction:column;line-height:1;}
+.nav-logo span{font-family:'DM Mono',monospace;font-size:10px;letter-spacing:.35em;color:var(--muted);font-weight:300;margin-top:4px;}
+.nav-links{display:flex;gap:44px;list-style:none;}
+.nav-links a{font-family:'DM Mono',monospace;font-size:14px;letter-spacing:.25em;color:var(--muted);text-decoration:none;text-transform:uppercase;transition:color .3s;position:relative;}
 .nav-links a::after{content:'';position:absolute;bottom:-4px;left:0;right:0;height:1px;background:var(--amber);transform:scaleX(0);transition:transform .3s;transform-origin:left;}
 .nav-links a:hover{color:var(--cream);}
 .nav-links a:hover::after{transform:scaleX(1);}
-.nav-phone{font-family:'DM Mono',monospace;font-size:11px;letter-spacing:.1em;color:var(--tape);text-decoration:none;transition:color .3s;}
+.nav-phone{font-family:'DM Mono',monospace;font-size:15px;letter-spacing:.1em;color:var(--tape);text-decoration:none;transition:color .3s;}
 .nav-phone:hover{color:var(--amber);}
 
 /* HERO */
