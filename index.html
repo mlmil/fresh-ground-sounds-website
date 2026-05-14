@@ -167,7 +167,8 @@ nav.scrolled{border-bottom-color:var(--hairline);background:rgba(10,9,8,.97);}
 .map-section{padding:0 48px 80px;}
 .map-wrap{border:1px solid var(--hairline);overflow:hidden;}
 .map-wrap iframe{width:100%;height:380px;border:none;filter:invert(1) hue-rotate(180deg) brightness(0.85) saturate(0.6);}
-iframe[src*="calendar.google.com"]{filter:invert(0.92) hue-rotate(180deg) brightness(0.88);}
+.cal-embed-wrap{width:100%;overflow:hidden;}
+.cal-embed-wrap iframe{width:100%;height:720px;border:none;display:block;transform:scale(1.2);transform-origin:50% 0;filter:invert(0.88) hue-rotate(180deg) brightness(0.9) saturate(1.3);}
 
 /* CHAT */
 .chat-fab{position:fixed;bottom:32px;right:32px;z-index:800;display:flex;flex-direction:column;align-items:flex-end;gap:10px;}
@@ -359,6 +360,7 @@ footer{background:var(--deep);border-top:1px solid var(--hairline);padding:64px 
         <div class="cal-live"></div>
       </div>
     </div>
+    <div class="cal-embed-wrap">
     <iframe
       src="https://calendar.google.com/calendar/embed?src=freshgroundrecords%40gmail.com&ctz=America%2FLos_Angeles&showTitle=0&showNav=1&showDate=1&showPrint=0&showTabs=0&showCalendars=0&mode=MONTH&bgcolor=%230a0908"
       title="Studio Availability Calendar"
@@ -366,6 +368,7 @@ footer{background:var(--deep);border-top:1px solid var(--hairline);padding:64px 
       frameborder="0"
       scrolling="no">
     </iframe>
+    </div>
   </div>
   <div class="rates-strip reveal" style="transition-delay:.2s">
     <div class="rate-card"><div class="rate-label">Recording per hour</div><div class="rate-price">$60 <small>/hr</small></div></div>
