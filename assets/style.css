@@ -69,7 +69,7 @@ nav {
   position: fixed;
   top: 0; left: 0; right: 0;
   z-index: 500;
-  padding: 24px 48px;
+  padding: 30px 56px;
   display: flex;
   justify-content: space-between;
   align-items: center;
@@ -85,7 +85,7 @@ nav.scrolled {
 
 .nav-logo {
   font-family: 'Bebas Neue', sans-serif;
-  font-size: 20px;
+  font-size: 26px;
   letter-spacing: 0.15em;
   color: var(--amber);
   text-decoration: none;
@@ -95,7 +95,7 @@ nav.scrolled {
 }
 .nav-logo span {
   font-family: 'DM Mono', monospace;
-  font-size: 8px;
+  font-size: 10px;
   letter-spacing: 0.35em;
   color: var(--muted);
   font-weight: 300;
@@ -104,12 +104,12 @@ nav.scrolled {
 
 .nav-links {
   display: flex;
-  gap: 36px;
+  gap: 44px;
   list-style: none;
 }
 .nav-links a {
   font-family: 'DM Mono', monospace;
-  font-size: 10px;
+  font-size: 14px;
   letter-spacing: 0.25em;
   color: var(--muted);
   text-decoration: none;
@@ -134,7 +134,7 @@ nav.scrolled {
 
 .nav-phone {
   font-family: 'DM Mono', monospace;
-  font-size: 11px;
+  font-size: 15px;
   letter-spacing: 0.1em;
   color: var(--tape);
   text-decoration: none;
