@@ -450,3 +450,4 @@ footer {
   .nav-hamburger { display: none !important; }
   .mobile-nav-overlay { display: none !important; }
 }
+iframe[src*="calendar.google.com"]{filter:invert(0.92) hue-rotate(180deg) brightness(0.88);}
