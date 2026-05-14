@@ -167,8 +167,9 @@ nav.scrolled{border-bottom-color:var(--hairline);background:rgba(10,9,8,.97);}
 .map-section{padding:0 48px 80px;}
 .map-wrap{border:1px solid var(--hairline);overflow:hidden;}
 .map-wrap iframe{width:100%;height:380px;border:none;filter:invert(1) hue-rotate(180deg) brightness(0.85) saturate(0.6);}
-.cal-embed-wrap{width:100%;overflow:hidden;}
-.cal-embed-wrap iframe{width:100%;height:720px;border:none;display:block;transform:scale(1.2);transform-origin:50% 0;filter:invert(0.88) hue-rotate(180deg) brightness(0.9) saturate(1.3);}
+.cal-embed-wrap{width:100%;overflow:hidden;position:relative;}
+.cal-embed-wrap::after{content:'';position:absolute;inset:0;pointer-events:none;z-index:2;background:radial-gradient(ellipse at 50% 25%,rgba(232,168,76,0.08) 0%,transparent 65%);}
+.cal-embed-wrap iframe{width:100%;height:720px;border:none;display:block;position:relative;z-index:1;transform:scale(1.2);transform-origin:50% 0;filter:invert(0.82) hue-rotate(165deg) sepia(0.35) saturate(1.6) brightness(0.95);}
 
 /* CHAT */
 .chat-fab{position:fixed;bottom:32px;right:32px;z-index:800;display:flex;flex-direction:column;align-items:flex-end;gap:10px;}
