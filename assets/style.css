@@ -450,7 +450,3 @@ footer {
   .nav-hamburger { display: none !important; }
   .mobile-nav-overlay { display: none !important; }
 }
-iframe[src*="calendar.google.com"]{filter:invert(0.82) hue-rotate(165deg) sepia(0.35) saturate(1.6) brightness(0.95);}
-.cal-embed-wrap{width:100%;overflow:hidden;position:relative;}
-.cal-embed-wrap::after{content:'';position:absolute;inset:0;pointer-events:none;z-index:2;background:radial-gradient(ellipse at 50% 25%,rgba(232,168,76,0.08) 0%,transparent 65%);}
-.cal-embed-wrap iframe{width:100%;height:720px;border:none;display:block;position:relative;z-index:1;transform:scale(1.2);transform-origin:50% 0;filter:invert(0.82) hue-rotate(165deg) sepia(0.35) saturate(1.6) brightness(0.95);}
